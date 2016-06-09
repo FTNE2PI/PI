@@ -1,9 +1,8 @@
 package table.property;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import xmlGeneration.XmlManipulator;
+import xml.managment.XMLManager;
 
 
 /**
@@ -24,7 +23,7 @@ public class PropertiesContainer {
 	}
 	
 	private PropertiesContainer(){
-		tablesMap = XmlManipulator.getAllTablePropertiesFromXMLs();
+		tablesMap = XMLManager.getAllTablePropertiesFromXMLs();
 		
 	}
 
