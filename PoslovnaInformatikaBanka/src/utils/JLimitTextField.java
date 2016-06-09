@@ -6,12 +6,12 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 
-public class JTextFieldWithLimit extends JTextField {
+public class JLimitTextField extends JTextField {
 
 	private static final long serialVersionUID = 1L;
 	private int limit;
 
-	public JTextFieldWithLimit(int columns, int limit) {
+	public JLimitTextField(int columns, int limit) {
 		super(columns);
 		this.limit = limit;
 	}
