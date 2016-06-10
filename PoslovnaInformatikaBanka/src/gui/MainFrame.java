@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -48,7 +47,8 @@ public class MainFrame extends JFrame {
 		setBackground(Color.WHITE);
 	}
 	
-	class ImagePanel extends JPanel {
+	//nesto ne iscrtava dobro kada se koristi ova klasa
+	/*class ImagePanel extends JPanel {
 
 		private Image img;
 
@@ -63,7 +63,7 @@ public class MainFrame extends JFrame {
 					(int) (this.getSize().getHeight() - img.getHeight(null)) / 2,
 					null);
 		}
-	}
+	}*/
 	
 	public static MainFrame getInstance() {
 		if (instance == null)
