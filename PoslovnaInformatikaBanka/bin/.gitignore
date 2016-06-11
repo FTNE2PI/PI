@@ -3,3 +3,8 @@
 /DBConnection.properties
 /table/
 /actions/
+/db/
+/exceptions/
+/users/
+/utils/
+/xml/
