@@ -1,7 +1,14 @@
 package gui.state;
 
+import gui.dialogs.GenericDialog;
+
 
 public class ReadOnlyState extends State {
+
+	public ReadOnlyState(GenericDialog dialog) {
+		super(dialog);
+		// TODO Auto-generated constructor stub
+	}
 
 	@Override
 	public void setMode() {

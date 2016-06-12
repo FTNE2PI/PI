@@ -1,6 +1,14 @@
 package gui.state;
 
+import gui.dialogs.GenericDialog;
+
 public abstract class State {
+	
+	protected GenericDialog dialog;
+	
+	public State(GenericDialog dialog) {
+		this.dialog = dialog;
+	}
 	
 	public abstract void setMode();
 	
