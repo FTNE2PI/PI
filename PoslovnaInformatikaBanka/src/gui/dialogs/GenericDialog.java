@@ -17,6 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.eclipse.jdt.core.compiler.InvalidInputException;
+
 public abstract class GenericDialog extends JDialog {
 	private static final long serialVersionUID = 9212332865510405498L;
 	private static final String ERROR_DATA_TRUNCTUATION = "Jedne ili više vrednosti koje ste uneli su prevelike.";
@@ -215,4 +217,116 @@ public abstract class GenericDialog extends JDialog {
 				btnDelete.setVisible(false);
 		}
 	}
+	
+	/**
+	 * Metoda za pretragu reda u tabeli.
+	 */
+	public void searchRow() {
+	}
+
+	/**
+	 * Metoda za dodavanje novog reda u tabelu.
+	 */
+	public void addRow() {
+
+	}
+
+	/**
+	 * Metoda za brisanje selektovanog reda u tabeli.
+	 */
+	public void deleteSelectedRow() {
+
+	}
+
+	/**
+	 * Metoda za izmenu selektovanog reda.
+	 */
+	public void updateRow() {
+
+	}
+	
+	public Toolbar getToolbar() {
+		return toolbar;
+	}
+
+	public StatusBar getStatusBar() {
+		return statusBar;
+	}
+
+	public JTable getTableGrid() {
+		return tableGrid;
+	}
+
+	public void clearTextFields() {
+
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public State getCurrentState() {
+		return state;
+	}
+
+	public Map<String, String> getZoomMap() {
+		return zoomMap;
+	}
+
+	public void setColumnsForZoom(Vector<String> columnsForZoom) {
+		this.columnsForZoom = columnsForZoom;
+	}
+
+	/**
+	 * Metoda koja vraca vektor sa nazivima kolona za zoom mehanizam.
+	 * 
+	 * @return
+	 */
+	public Vector<String> getColumnsForZoom() {
+		Vector<String> retVal = new Vector<String>();
+		
+		return retVal;
+	}
+
+	/**
+	 * Metoda koja vraca vektor naziva labela primarnih kljuceva.
+	 * 
+	 * @return
+	 */
+	public Vector<String> getPrimaryKeysNames() {
+		return null;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+	
+	private int getTableRowIndex(Vector<Object> rowData) {
+		
+		return 0;
+	}
+
+	protected abstract void validateInputs() throws InvalidInputException;
+	
+	public boolean isAllLetters(String s) {
+		return s.matches("[a-zA-Z]+");
+	}
+
+	public boolean isAllNumbersOrBigLetters(String s) {
+		return s.matches("[A-Z0-9]+");
+	}
+
+	public boolean isKontrolniBrojGenerisan() {
+		return kontrolniBrojGenerisan;
+	}
+
+	public void setKontrolniBrojGenerisan(boolean kontrolniBrojGenerisan) {
+		this.kontrolniBrojGenerisan = kontrolniBrojGenerisan;
+	}
+
+	public JButton getBtnGenerisiKontrolniBroj() {
+		return btnGenerisiKontrolniBroj;
+	}
+
+	
 }
