@@ -1,5 +1,9 @@
-/gui/
-/app/
 /DBConnection.properties
+/app/
+/db/
+/exceptions/
+/gui/
 /table/
-/actions/
+/users/
+/utils/
+/xml/
