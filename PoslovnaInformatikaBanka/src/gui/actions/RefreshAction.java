@@ -1,8 +1,10 @@
 package gui.actions;
 
 import gui.dialogs.GenericDialog;
+import gui.dialogs.model.GenericTableModel;
 
 import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
@@ -19,6 +21,13 @@ public class RefreshAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		GenericTableModel gtm = (GenericTableModel)dialog.getTableGrid().getModel();
+		try {
+			gtm.open();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

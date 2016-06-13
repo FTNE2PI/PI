@@ -19,6 +19,8 @@ public class ZoomAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		dialog.fillZoomMap();
+		dialog.setVisible(false);
 
 	}
 

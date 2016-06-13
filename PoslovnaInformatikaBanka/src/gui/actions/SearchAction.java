@@ -1,6 +1,7 @@
 package gui.actions;
 
 import gui.dialogs.GenericDialog;
+import gui.state.SearchState;
 
 import java.awt.event.ActionEvent;
 
@@ -19,6 +20,9 @@ public class SearchAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		dialog.setState(new SearchState(dialog));
+		dialog.getCurrentState().setMode();
+		dialog.getStatusBar().setStatusPaneText(dialog.getCurrentState().toString());
 
 	}
 
