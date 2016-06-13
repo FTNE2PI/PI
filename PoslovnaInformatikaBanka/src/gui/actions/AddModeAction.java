@@ -23,6 +23,9 @@ public class AddModeAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		dialog.setState(new AddState(dialog));
+		dialog.getCurrentState().setMode();
+		dialog.getStatusBar().setStatusPaneText(dialog.getCurrentState().toString());
 
 	}
 

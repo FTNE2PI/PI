@@ -21,6 +21,7 @@ public class ItemDeleteAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		dialog.deleteSelectedRow();
 
 	}
 

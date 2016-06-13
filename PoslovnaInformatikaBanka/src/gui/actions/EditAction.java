@@ -1,6 +1,7 @@
 package gui.actions;
 
 import gui.dialogs.GenericDialog;
+import gui.state.EditState;
 
 import java.awt.event.ActionEvent;
 
@@ -20,6 +21,9 @@ public class EditAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		dialog.setState(new EditState(dialog));
+		dialog.getCurrentState().setMode();
+		dialog.getStatusBar().setStatusPaneText(dialog.getCurrentState().toString());
 
 	}
 

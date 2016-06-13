@@ -13,7 +13,7 @@ public class HelpAction extends AbstractAction{
 	
 	public HelpAction(GenericDialog dialog){
 		putValue(LARGE_ICON_KEY, new ImageIcon("images/help.gif"));
-		putValue(NAME,"Delete Item");
+		putValue(NAME,"Help");
 		this.dialog = dialog;
 	}
 	
