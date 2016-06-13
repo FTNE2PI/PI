@@ -2,9 +2,15 @@ package gui.dialogs;
 
 import gui.StatusBar;
 import gui.Toolbar;
+import gui.dialogs.model.GenericTableModel;
 import gui.state.State;
 
 import java.awt.Component;
+import java.sql.DataTruncation;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -13,11 +19,17 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.eclipse.jdt.core.compiler.InvalidInputException;
+
+import table.property.ColumnProperties;
+import table.property.PropertiesContainer;
+import table.property.TableProperties;
 
 public abstract class GenericDialog extends JDialog {
 	private static final long serialVersionUID = 9212332865510405498L;
@@ -59,7 +71,16 @@ public abstract class GenericDialog extends JDialog {
 	}
 
 	protected void initializeTableModel() {
-		
+		GenericTableModel tableModel = new GenericTableModel(
+				PropertiesContainer.getInstance().getTablesMap().get(tableName));
+		tableGrid.setModel(tableModel);
+
+		try {
+			tableModel.open();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public JPanel getFormInputPanel() {
@@ -94,12 +115,6 @@ public abstract class GenericDialog extends JDialog {
 		return foundInput;
 	}
 	
-	/**
-	 * Metoda koja vraca vrednost komponente na osnovu imena kolone.
-	 * 
-	 * @param columnName
-	 * @return
-	 */
 	protected String getInput(String columnName) {
 		Vector<String> resultHolder = new Vector<String>();
 		getRecursiveInput(columnName, resultHolder, formInputPanel);
@@ -144,21 +159,22 @@ public abstract class GenericDialog extends JDialog {
 	}
 
 	public void fillNext(Vector<Object> rowData, String tName) {
-		
+		GenericTableModel gtm = (GenericTableModel) tableGrid.getModel();
+		try {
+			gtm.fillNext(rowData, tName);
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, e.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
-	/**
-	 * Metoda koja prazni komponente u dijalogu.
-	 */
 	public void emptyTextField() {
 		int index = 0;
 		index = emptyTextFieldRecursive(formInputPanel, index);
 
 	}
 
-	/**
-	 * Metoda koja vraca aktivne textFieldove u dijalogu
-	 */
 	public void getActiveTextFields() {
 		for (Component comp : order) {
 			if (comp instanceof JTextField)
@@ -218,31 +234,163 @@ public abstract class GenericDialog extends JDialog {
 		}
 	}
 	
-	/**
-	 * Metoda za pretragu reda u tabeli.
-	 */
 	public void searchRow() {
 	}
+	
+	public GenericTableModel getGenTableModel() {
+		return (GenericTableModel) tableGrid.getModel();
+	}
+	
+	private void getVectorWithComponentValueRecursive(Vector<Object> values,
+			JPanel currentPanel) {
+		Vector<String> lookUpNames = getGenTableModel().getTableProperties()
+				.getLookUpElementNames();
+		for (int i = 0; i < currentPanel.getComponentCount(); i++) {
+			Component c = currentPanel.getComponent(i);
+			if (c instanceof JPanel)
+				getVectorWithComponentValueRecursive(values, (JPanel) c);
+			else if (c instanceof JFormattedTextField) {
+				JFormattedTextField ftf = (JFormattedTextField) c;
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date utilDate = null;
+				if (!ftf.getText().trim().isEmpty()) {
+					try {
+						utilDate = df.parse(ftf.getText());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					values.add(new java.sql.Date(utilDate.getTime()));
+				} else
+					values.add(null);
+			} else if (c instanceof JTextField) {
+				JTextField tf = (JTextField) c;
+				ColumnProperties cp = getGenTableModel().getTableProperties()
+						.getColumnProperties(tf.getName());
+				if (!lookUpNames.contains(tf.getName())) {
+					if (!tf.getText().trim().isEmpty()) {
+						if (cp.getType().equals("java.sql.Date")) {
+							SimpleDateFormat sdf = new SimpleDateFormat(
+									"yyyy-MM-dd");
+							Date utilDate = null;
+							try {
+								utilDate = sdf.parse(tf.getText().trim());
+							} catch (ParseException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
-	/**
-	 * Metoda za dodavanje novog reda u tabelu.
-	 */
+							values.add(new java.sql.Date(utilDate.getTime()));
+						} else
+							values.add(tf.getText().trim());
+					} else
+						values.add(null);
+				}
+			} else if (c instanceof JCheckBox) {
+				JCheckBox cb = (JCheckBox) c;
+				values.add(cb.isSelected());
+			} else if (c instanceof JComboBox) {
+				JComboBox cb = (JComboBox) c;
+				values.add(cb.getSelectedItem());
+			}
+		}
+	}
+	
+	protected Vector<Object> getVectorWithComponentValue() {
+		Vector<Object> retVal = new Vector<Object>();
+		getVectorWithComponentValueRecursive(retVal, formInputPanel);
+
+		return retVal;
+	}
+	
 	public void addRow() {
+		try {
+			validateInputs();
+		} catch (InvalidInputException e1) {
 
+			JOptionPane.showMessageDialog(this,
+					"Desila se greška: \n" + e1.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		GenericTableModel gtm = (GenericTableModel) tableGrid.getModel();
+		int index;
+		try {
+			Vector<Object> rowData = getVectorWithComponentValue();
+			gtm.insertRow(rowData);
+			index = getTableRowIndex(rowData);
+			tableGrid.setRowSelectionInterval(index, index);
+			getCurrentState().setMode();
+			// getStatusBar().setStatusPaneText(getCurrentState().toString());
+
+		} catch (DataTruncation e) {
+			JOptionPane.showMessageDialog(this, ERROR_DATA_TRUNCTUATION,
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this,
+					"Desila se greška: \n" + e.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
-	/**
-	 * Metoda za brisanje selektovanog reda u tabeli.
-	 */
 	public void deleteSelectedRow() {
+		int index = tableGrid.getSelectedRow();
+		if (index < 0)
+			return;
+		GenericTableModel gtm = (GenericTableModel) tableGrid.getModel();
+		TableProperties cp = gtm.getTableProperties();
+		Vector<Object> primKeys = new Vector<Object>();
+		for (String i : cp.getPrimaryKeysFromTable()) {
+			primKeys.add(getInput(i));
+		}
 
+		try {
+			gtm.deleteRow(primKeys, index);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this,
+					"Desila se greška: \n" + e.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
-	/**
-	 * Metoda za izmenu selektovanog reda.
-	 */
 	public void updateRow() {
+		int selectedIndex = tableGrid.getSelectedRow();
+		if (selectedIndex < 0) {
+			return;
+		}
 
+		try {
+			validateInputs();
+		} catch (InvalidInputException e1) {
+
+			JOptionPane.showMessageDialog(this,
+					"Desila se greška: \n" + e1.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+			return;
+
+		}
+
+		GenericTableModel gtm = (GenericTableModel) tableGrid.getModel();
+		Vector<Object> primKeys = new Vector<Object>();
+		for (int i = 0; i < tableGrid.getColumnCount(); i++) {
+			if (getPrimaryKeysNames().contains(tableGrid.getColumnName(i))) {
+				primKeys.add(tableGrid.getValueAt(selectedIndex, i));
+			}
+		}
+		Vector<Object> rowData = getVectorWithComponentValue();
+		try {
+			gtm.updateRow(selectedIndex, rowData, primKeys);
+		} catch (DataTruncation e) {
+			JOptionPane.showMessageDialog(this, ERROR_DATA_TRUNCTUATION,
+					"Greska", JOptionPane.ERROR_MESSAGE);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this,
+					"Desila se greška: \n" + e.getMessage(), "Greska",
+					JOptionPane.ERROR_MESSAGE);
+
+		}
+		selectedIndex = getTableRowIndex(rowData);
+		tableGrid.setRowSelectionInterval(selectedIndex, selectedIndex);
 	}
 	
 	public Toolbar getToolbar() {
@@ -255,10 +403,6 @@ public abstract class GenericDialog extends JDialog {
 
 	public JTable getTableGrid() {
 		return tableGrid;
-	}
-
-	public void clearTextFields() {
-
 	}
 
 	public void setState(State state) {
@@ -277,22 +421,12 @@ public abstract class GenericDialog extends JDialog {
 		this.columnsForZoom = columnsForZoom;
 	}
 
-	/**
-	 * Metoda koja vraca vektor sa nazivima kolona za zoom mehanizam.
-	 * 
-	 * @return
-	 */
 	public Vector<String> getColumnsForZoom() {
 		Vector<String> retVal = new Vector<String>();
 		
 		return retVal;
 	}
 
-	/**
-	 * Metoda koja vraca vektor naziva labela primarnih kljuceva.
-	 * 
-	 * @return
-	 */
 	public Vector<String> getPrimaryKeysNames() {
 		return null;
 	}
@@ -302,8 +436,35 @@ public abstract class GenericDialog extends JDialog {
 	}
 	
 	private int getTableRowIndex(Vector<Object> rowData) {
-		
-		return 0;
+		int retVal = 0;
+		Vector<Boolean> flags = new Vector<Boolean>();
+		for (int i = 0; i < tableGrid.getRowCount(); i++) {
+			int index = 0;
+			for (int j = 0; j < tableGrid.getModel().getColumnCount(); j++) {
+
+				String name = tableGrid.getModel().getColumnName(j);
+				if (getGenTableModel().getTableProperties()
+						.getPrimaryKeysLabelName().contains(name)) {
+					Object obj = tableGrid.getModel().getValueAt(i, j);
+					if (rowData.get(index).toString().equals(obj.toString()))
+						flags.add(true);
+					else {
+						flags.add(false);
+						break;
+					}
+					index++;
+
+				}
+
+			}
+			if (!flags.contains(false)) {
+				retVal = i;
+				break;
+			} else
+				flags.clear();
+		}
+
+		return retVal;
 	}
 
 	protected abstract void validateInputs() throws InvalidInputException;
@@ -328,5 +489,12 @@ public abstract class GenericDialog extends JDialog {
 		return btnGenerisiKontrolniBroj;
 	}
 
-	
+	public static boolean isUpper(String s) {
+		for (char c : s.toCharArray()) {
+			if (!Character.isUpperCase(c))
+				return false;
+		}
+
+		return true;
+	}
 }

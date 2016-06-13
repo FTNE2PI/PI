@@ -32,7 +32,6 @@ public class GenericTableModel extends DefaultTableModel {
 	public GenericTableModel(TableProperties tableProperties) {
 		super(tableProperties.getColumnsLabel(), 0);
 		this.tableName = tableProperties.getTableName();
-		;
 		this.tableProperties = tableProperties;
 
 	}

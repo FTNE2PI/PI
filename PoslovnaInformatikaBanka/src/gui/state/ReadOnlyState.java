@@ -2,17 +2,19 @@ package gui.state;
 
 import gui.dialogs.GenericDialog;
 
-
 public class ReadOnlyState extends State {
 
+	private GenericDialog dialog;
+	
 	public ReadOnlyState(GenericDialog dialog) {
 		super(dialog);
-		// TODO Auto-generated constructor stub
+		this.dialog = dialog;
 	}
 
 	@Override
 	public void setMode() {
-		
+		dialog.sync();
+		dialog.getStatusBar().setStatusPaneText(this.toString());
 	}
 
 	@Override
