@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
+import javax.swing.JTable;
 
 @SuppressWarnings("serial")
 public class ItemFirstAction extends AbstractAction {
@@ -21,6 +22,10 @@ public class ItemFirstAction extends AbstractAction {
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		JTable table = dialog.getTableGrid();
+		int rowCount = table.getModel().getRowCount(); 
+	    if (rowCount > 0)
+	    	table.setRowSelectionInterval(0, 0);
 
 	}
 
