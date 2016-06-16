@@ -3,9 +3,20 @@ package gui.dialogs;
 import gui.StatusBar;
 import gui.Toolbar;
 import gui.dialogs.model.GenericTableModel;
+import gui.state.EditState;
+import gui.state.ReadOnlyState;
 import gui.state.State;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.FocusTraversalPolicy;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.DataTruncation;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -15,15 +26,28 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.JViewport;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import org.eclipse.jdt.core.compiler.InvalidInputException;
 
@@ -57,6 +81,221 @@ public abstract class GenericDialog extends JDialog {
 	protected boolean kontrolniBrojGenerisan = false;
 	protected JButton btnGenerisiKontrolniBroj;
 	
+	public GenericDialog(JFrame parent, String titleName, String tableName,
+			boolean isReadOnly) {
+
+		super(parent);
+		this.titleName = titleName;
+		this.tableName = tableName;
+		this.isReadOnly = isReadOnly;
+		setTitle(this.titleName);
+		setSize(800, 600);
+		setLocationRelativeTo(parent);
+		setModal(true);
+		order = new Vector<Component>();
+		orderActiveTextFields = new Vector<Component>();
+
+		toolbar = new Toolbar(this);
+		add(toolbar, BorderLayout.NORTH);
+
+		statusBar = new StatusBar();
+		add(statusBar, BorderLayout.SOUTH);
+
+		if (isReadOnly)
+			state = new ReadOnlyState(this);
+		else
+			state = new EditState(this);
+
+		final JScrollPane scrollPane = new JScrollPane(tableGrid);
+
+		tableGrid.setAutoCreateRowSorter(true);
+		tableGrid.setRowSelectionAllowed(true);
+		tableGrid.setColumnSelectionAllowed(false);
+		tableGrid.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableGrid.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+					public void valueChanged(ListSelectionEvent e) {
+						if (e.getValueIsAdjusting())
+							return;
+						sync();
+					}
+				});
+		DefaultTableCellRenderer renderer = (DefaultTableCellRenderer) tableGrid
+				.getTableHeader().getDefaultRenderer();
+		renderer.setHorizontalAlignment(SwingConstants.LEFT);
+
+		initializeTableModel();
+		hideExcludedColumns();
+		if (getGenTableModel().getTableProperties().isNextEmpty())
+			toolbar.getNextAction().setEnabled(false);
+
+		formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
+
+		formInputPanel
+				.setLayout(new BoxLayout(formInputPanel, BoxLayout.Y_AXIS));
+		initializeFormInputPanel();
+
+		getCurrentState().setMode();
+
+		formButtonsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JButton btnCommit = new JButton();
+		btnCommit.setIcon(new ImageIcon("images/commit.gif"));
+		btnCommit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				state.commit();
+			}
+		});
+		JButton btnRollback = new JButton();
+		btnRollback.setIcon(new ImageIcon("images/remove.gif"));
+		btnRollback.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				state.rollback();
+			}
+		});
+		formButtonsPanel.add(btnCommit);
+		formButtonsPanel.add(btnRollback);
+
+		// potrebno dugme za ukidanje rauna poslovnih lica
+
+		final JScrollPane jsp = new JScrollPane(formInputPanel,
+				JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		if (brojKolona < 5)
+			jsp.setPreferredSize(new Dimension(formInputPanel.getWidth(),
+					brojKolona * 50));
+		formPanel.add(Box.createGlue());
+		formPanel.add(scrollPane);
+		formPanel.add(Box.createHorizontalStrut(5));
+		formPanel.add(jsp);
+		formPanel.add(Box.createHorizontalStrut(5));
+		formPanel.add(formButtonsPanel);
+
+		add(formPanel);
+		getComponentsFromInputPanel(formInputPanel);
+
+		setActionStateForReadOnly();
+
+		jsp.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
+		jsp.getViewport().setSize(
+				new Dimension(formInputPanel.getBounds().width, formInputPanel
+						.getBounds().height / 2));
+		jsp.getViewport().setViewSize(
+				new Dimension(formInputPanel.getBounds().width, formInputPanel
+						.getBounds().height / 2));
+		jsp.getViewport().setViewPosition(new Point(0, 0));
+
+		getActiveTextFields();
+
+		setFocusTraversalPolicy(new FocusTraversalPolicy() {
+
+			@Override
+			public Component getLastComponent(Container aContainer) {
+
+				return order.lastElement();
+			}
+
+			@Override
+			public Component getFirstComponent(Container aContainer) {
+
+				return order.get(0);
+
+			}
+
+			@Override
+			public Component getDefaultComponent(Container aContainer) {
+				// TODO Auto-generated method stub
+
+				return order.get(0);
+			}
+
+			@Override
+			public Component getComponentBefore(Container aContainer,
+					Component aComponent) {
+				// TODO Auto-generated method stub
+				int idx = order.indexOf(aComponent) - 1;
+				if (idx < 0) {
+					idx = order.size() - 1;
+				}
+
+				jsp.getViewport().setViewPosition(
+						(new Point((int) formInputPanel.getBounds().getMinX(),
+								(int) order.get(idx).getBounds().getMinY())));
+				return order.get(idx);
+			}
+
+			@Override
+			public Component getComponentAfter(Container aContainer,
+					Component aComponent) {
+				// TODO Auto-generated method stub
+				int idx = (order.indexOf(aComponent) + 1) % order.size();
+
+				if (!(order.get(idx) instanceof JButton))
+					jsp.getViewport().setViewPosition(
+							(new Point((int) formInputPanel.getBounds()
+									.getMinX(), (int) order.get(idx)
+									.getBounds().getMinY())));
+
+				return order.get(idx);
+			}
+
+		});
+	}
+	
+	public void setActionStateForReadOnly() {
+		if (isReadOnly) {
+			toolbar.getAddAction().setEnabled(false);
+			toolbar.getEditAction().setEnabled(false);
+			toolbar.getDeleteAction().setEnabled(false);
+		}
+	}
+	
+	protected void getComponentsFromInputPanel(JComponent component) {
+		Vector<Component> components = new Vector<Component>();
+		for (int i = 0; i < component.getComponents().length; i++) {
+			if (component.getComponent(i) instanceof JTextField) {
+				JTextField tf = (JTextField) component.getComponent(i);
+
+				// Da ne uzima u obzir ne editujuca polja
+				if ((tf.isEditable()) && (tf.isEnabled()))
+					components.add(tf);
+			} else if (component.getComponent(i) instanceof JCheckBox) {
+				JCheckBox cb = (JCheckBox) component.getComponent(i);
+
+				// Da ne uzima u obzir ne editujuca polja
+				if (cb.isEnabled())
+					components.add(cb);
+			}
+
+			else if (component.getComponent(i) instanceof JButton) {
+				JButton button = (JButton) component.getComponent(i);
+
+				// Da ne uzima u obzir ne editujuca polja
+
+				components.add(button);
+			}
+
+			else if (component.getComponent(i) instanceof JPanel) {
+				JPanel pan = (JPanel) component.getComponent(i);
+				getComponentsFromInputPanel(pan);
+
+			}
+
+		}
+
+		order.addAll(components);
+	}
+	
+	protected void hideExcludedColumns() {
+		GenericTableModel tableModel = (GenericTableModel) tableGrid.getModel();
+		for (Integer i : tableModel.getExcludedIndexes()) {
+			tableGrid.removeColumn(tableGrid.getColumnModel().getColumn(i));
+		}
+	}
+	
 	public boolean isReadOnly() {
 		return isReadOnly;
 	}
@@ -69,7 +308,7 @@ public abstract class GenericDialog extends JDialog {
 		if (!order.isEmpty())
 			order.clear();
 	}
-
+	
 	protected void initializeTableModel() {
 		GenericTableModel tableModel = new GenericTableModel(
 				PropertiesContainer.getInstance().getTablesMap().get(tableName));
@@ -496,5 +735,31 @@ public abstract class GenericDialog extends JDialog {
 		}
 
 		return true;
+	}
+	
+	protected void addComponentToFormInputPanel(JComponent componentToAdd,
+			String labelText, boolean mandatory) {
+		JLabel label = new JLabel(labelText);
+		label.setPreferredSize(new Dimension(180, 20));
+		JLabel labelMandatory = new JLabel();
+		if (mandatory)
+			labelMandatory.setText("*");
+		labelMandatory.setForeground(Color.RED);
+
+		if (componentToAdd instanceof JPanel) {
+			componentToAdd.add(label, 0);
+			componentToAdd.add(labelMandatory,
+					componentToAdd.getComponentCount());
+			formInputPanel.add(componentToAdd);
+
+		} else {
+			JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			panel.add(label);
+			panel.add(componentToAdd);
+			panel.add(labelMandatory);
+			formInputPanel.add(panel);
+		}
+		formInputPanel.add(Box.createHorizontalStrut(5));
+		brojKolona++;
 	}
 }

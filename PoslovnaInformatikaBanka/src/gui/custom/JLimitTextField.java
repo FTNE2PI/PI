@@ -1,4 +1,4 @@
-package utils;
+package gui.custom;
 
 import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
