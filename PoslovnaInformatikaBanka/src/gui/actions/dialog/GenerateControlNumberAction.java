@@ -1,6 +1,6 @@
 package gui.actions.dialog;
 
-import gui.dialogs.GenericDialog;
+import gui.dialogs.generic.GenericDialog;
 
 import java.awt.event.ActionEvent;
 

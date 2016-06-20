@@ -2,7 +2,7 @@ package gui.actions.dialog;
 
 import exceptions.InvalidExportException;
 import gui.MainFrame;
-import gui.dialogs.MedjubankarskiNalogDialog;
+import gui.dialogs.generic.MedjubankarskiNalogDialog;
 import gui.tasks.ExportMedjubankarskiNalog;
 
 import java.awt.Cursor;

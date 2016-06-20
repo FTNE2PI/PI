@@ -1,18 +1,18 @@
 package gui;
 
-import gui.actions.AddModeAction;
-import gui.actions.EditAction;
-import gui.actions.HelpAction;
-import gui.actions.ItemDeleteAction;
-import gui.actions.ItemFirstAction;
-import gui.actions.ItemLastAction;
-import gui.actions.ItemNextAction;
-import gui.actions.ItemPreviousAction;
-import gui.actions.NextAction;
-import gui.actions.RefreshAction;
-import gui.actions.SearchAction;
-import gui.actions.ZoomAction;
-import gui.dialogs.GenericDialog;
+import gui.actions.toolbar.AddModeAction;
+import gui.actions.toolbar.EditAction;
+import gui.actions.toolbar.HelpAction;
+import gui.actions.toolbar.ItemDeleteAction;
+import gui.actions.toolbar.ItemFirstAction;
+import gui.actions.toolbar.ItemLastAction;
+import gui.actions.toolbar.ItemNextAction;
+import gui.actions.toolbar.ItemPreviousAction;
+import gui.actions.toolbar.NextAction;
+import gui.actions.toolbar.RefreshAction;
+import gui.actions.toolbar.SearchAction;
+import gui.actions.toolbar.ZoomAction;
+import gui.dialogs.generic.GenericDialog;
 
 import javax.swing.Action;
 import javax.swing.JToolBar;

@@ -1,7 +1,7 @@
 package gui.actions.dialog;
 
 import gui.MainFrame;
-import gui.dialogs.DnevnoStanjeRacunaDialog;
+import gui.dialogs.generic.DnevnoStanjeRacunaDialog;
 
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;

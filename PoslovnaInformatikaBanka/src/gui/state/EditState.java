@@ -1,6 +1,6 @@
 package gui.state;
 
-import gui.dialogs.GenericDialog;
+import gui.dialogs.generic.GenericDialog;
 
 public class EditState extends State {
 

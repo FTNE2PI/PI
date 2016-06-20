@@ -2,7 +2,7 @@ package gui.actions.dialog;
 
 import exceptions.InvalidExportException;
 import gui.MainFrame;
-import gui.dialogs.PrenosIzvodaPresekDialog;
+import gui.dialogs.generic.PrenosIzvodaPresekDialog;
 import gui.tasks.ExportPresek;
 
 import java.awt.Cursor;
