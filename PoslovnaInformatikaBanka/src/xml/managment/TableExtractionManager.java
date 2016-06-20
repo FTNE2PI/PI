@@ -28,6 +28,17 @@ public class TableExtractionManager {
 	public static final String EXCLUDE_PREFIX = "+EXCLUDE+";
 	public static final String LOOKUP_PREFIX = "+LOOKUP+";
 	
+	public static void generateXML(){
+		if(XMLManager.testXMLContent()){
+			System.out.println("Ekstraktuje...");
+			Collection<TableProperties> tableProperties = extractTablePropertiesFromPDM();
+			System.out.println("Uspesno ekstraktovao Table Propertije");
+			System.out.println("Generise...");
+			XMLManager.generateXMLs(tableProperties);
+			System.out.println("Uspesno izgenerisao XMLove");
+		}
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Ekstraktuje...");
 		Collection<TableProperties> tableProperties = extractTablePropertiesFromPDM();

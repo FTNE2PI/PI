@@ -19,6 +19,17 @@ public class XMLManager {
 	public static final String XML_LOCATION = "./xml/";
 	public static final String EXTENSION = ".xml";
 	
+	public static boolean testXMLContent(){
+		File file = new File(XML_LOCATION);
+		File[] contents = file.listFiles();
+		
+		if (contents.length == 0) {
+			return true;
+		}
+		
+		return false;
+	}
+	
 	public static void generateXMLs(Collection<TableProperties> tablePropertiesCollection){
 		for(TableProperties tableProperties : tablePropertiesCollection)
 			try {

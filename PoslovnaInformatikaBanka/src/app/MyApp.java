@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import table.property.PropertiesContainer;
 import utils.CurrentBank;
+import xml.managment.TableExtractionManager;
 
 public class MyApp {
 
@@ -20,6 +21,9 @@ public class MyApp {
 	}*/
 	
 	public static void main(String[] args) {
+		
+		TableExtractionManager.generateXML();
+		
 		//Pokretanje PropertiesContainera prvi put da bi odmah izgenerisali TablePropertije, da ne bi cekali kasnije u programu.
 		try {
 			CurrentBank.insertCurrentBankToDatabase();
