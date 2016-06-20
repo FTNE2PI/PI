@@ -45,6 +45,12 @@ public class GenericTableModel extends DefaultTableModel {
 		fillData(getSQLForOpenWithOrderBy());
 	}
 
+	/**
+	 * Metoda koja popunjava tabelu forme na osnovu prosledjenog sql upita.
+	 * 
+	 * @param sql
+	 * @throws SQLException
+	 */
 	public void fillData(String sql) throws SQLException {
 		setRowCount(0);
 		Statement stmt = DBConnection.getConnection().createStatement();
@@ -133,6 +139,13 @@ public class GenericTableModel extends DefaultTableModel {
 		}
 	}
 
+	/**
+	 * Metoda koja brise selektovan red iz tabele.
+	 * 
+	 * @param primaryKeys
+	 * @param index
+	 * @throws SQLException
+	 */
 	public void deleteRow(Vector<Object> primaryKeys, int index)
 			throws SQLException {
 		checkRow(index, primaryKeys);
@@ -154,6 +167,13 @@ public class GenericTableModel extends DefaultTableModel {
 		}
 	}
 
+	/**
+	 * Metoda koja dodaje novi red u tabelu.
+	 * 
+	 * @param rowData
+	 * @return
+	 * @throws SQLException
+	 */
 	public int insertRow(Vector<Object> rowData) throws SQLException {
 		int retVal = 0;
 		PreparedStatement stmt = DBConnection.getConnection().prepareStatement(
@@ -179,6 +199,14 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
+	/**
+	 * Metoda za izmenu selektovanog reda u tabeli.
+	 * 
+	 * @param index
+	 * @param rowData
+	 * @param kljucevi
+	 * @throws SQLException
+	 */
 	public void updateRow(int index, Vector<Object> rowData,
 			Vector<Object> kljucevi) throws SQLException {
 		checkRow(index, kljucevi);
@@ -205,6 +233,12 @@ public class GenericTableModel extends DefaultTableModel {
 
 	}
 
+	/**
+	 * Metoda za pretrazivanje.
+	 * 
+	 * @param rowData
+	 * @throws SQLException
+	 */
 	public void searchRow(Vector<Object> rowData) throws SQLException {
 		setRowCount(0);
 		PreparedStatement stmt = DBConnection.getConnection().prepareStatement(
@@ -233,6 +267,13 @@ public class GenericTableModel extends DefaultTableModel {
 
 	}
 
+	/**
+	 * Metoda za sortiranje prilikom unosa novog reda u tabelu.
+	 * 
+	 * @param rowData
+	 * @param key
+	 * @return
+	 */
 	private int sortedInsert(Vector<Object> rowData) {
 		int left = 0;
 		int right = getRowCount() - 1;
@@ -267,6 +308,14 @@ public class GenericTableModel extends DefaultTableModel {
 		return left;
 	}
 
+	/**
+	 * Metoda koja popunjava tabelu po odredjenom kriterijumu. Koristi se za
+	 * next mehanizam.
+	 * 
+	 * @param rowData
+	 * @param tName
+	 * @throws SQLException
+	 */
 	public void fillNext(Vector<Object> rowData, String tName)
 			throws SQLException {
 		setRowCount(0);
@@ -298,6 +347,12 @@ public class GenericTableModel extends DefaultTableModel {
 		fireTableDataChanged();
 	}
 
+	/**
+	 * Metoda koja generise sql upit za popunjavanje tabele prilikom otvaranja
+	 * forme.
+	 * 
+	 * @return
+	 */
 	private String getSQLForOpen() {
 		String retVal = "";
 		// provera da li radimo spajanje tabela ili ne
@@ -476,6 +531,11 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
+	/**
+	 * Metoda koja generise sql upit za pretrazivanje podataka.
+	 * 
+	 * @return
+	 */
 	private String getSQLForSearch(Vector<Object> rowData) {
 		String retVal = "";
 		if (tableProperties.getZoom().isEmpty()) {
@@ -537,6 +597,12 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
+	/**
+	 * Metoda koja generise sql upit za next mehanizam.
+	 * 
+	 * @param tName
+	 * @return
+	 */
 	private String getSQLForNext(String tName) {
 		String retVal = getSQLForOpen();
 		TableProperties tp = PropertiesContainer.getInstance().getTablesMap()
@@ -549,6 +615,11 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
+	/**
+	 * Metoda koja generise sql upit za dodavanje podataka u tabelu.
+	 * 
+	 * @return
+	 */
 	private String getSQLForInsert() {
 
 		String retVal = "INSERT INTO " + tableName + " (";
@@ -578,6 +649,11 @@ public class GenericTableModel extends DefaultTableModel {
 
 	}
 
+	/**
+	 * Metoda koja generise sql upit za brisanje podataka iz tabele.
+	 * 
+	 * @return
+	 */
 	private String getSQLForDelete() {
 
 		String retVal = "DELETE FROM " + tableName + " WHERE ";
@@ -593,7 +669,11 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
-
+	/**
+	 * Metoda koja generise sql upit za izmenu podataka u tabeli.
+	 * 
+	 * @return
+	 */
 	private String getSQLForUpdate() {
 
 		String retVal = "UPDATE " + tableName + " SET ";
@@ -619,7 +699,11 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
-
+	/**
+	 * Metoda koja generise sql upit za checkRow metodu.
+	 * 
+	 * @return
+	 */
 	private String getSQLForCheckRow() {
 		String retVal = "";
 		if (tableProperties.getZoom().isEmpty()) {
@@ -648,12 +732,20 @@ public class GenericTableModel extends DefaultTableModel {
 		return retVal;
 	}
 
-
+	/**
+	 * Metoda koja vraca vektor indeksa kolona koje se ne trebaju prikazati.
+	 * 
+	 * @return
+	 */
 	public Vector<Integer> getExcludedIndexes() {
 		return tableProperties.getIndexesOfExcludedColumns();
 	}
 
-
+	/**
+	 * Metoda koja vraca table properties za formu.
+	 * 
+	 * @return
+	 */
 	public TableProperties getTableProperties() {
 		return tableProperties;
 

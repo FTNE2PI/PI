@@ -37,7 +37,7 @@ public class Menu extends JMenuBar {
 	
 	private JMenu mnuBanka = new JMenu("File");
 	private JMenu mnuOperacije = new JMenu("Operacije");
-	private JMenu mnuKorisnik=new JMenu("Anonimus");
+	private JMenu mnuKorisnik=new JMenu("Gost");
 	private JMenu mnuIzvestaji = new JMenu("Izveštaji");
 	private JMenuItem itemSpisakRacuna = new JMenuItem("Spisak računa zadate banke");
 	private JMenuItem itemDrzave = new JMenuItem("Države");
@@ -220,7 +220,7 @@ public class Menu extends JMenuBar {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				MainFrame.getInstance().setCurrentUser(null);
-				mnuKorisnik.setText("Anonimus");
+				mnuKorisnik.setText("Gost");
 				LoginDialog dialog=new LoginDialog();
 				dialog.setVisible(true);
 			}
