@@ -21,12 +21,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.swing.Action;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import utils.LookAndFeel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
@@ -39,6 +41,7 @@ public class Menu extends JMenuBar {
 	private JMenu mnuOperacije = new JMenu("Operacije");
 	private JMenu mnuKorisnik=new JMenu("Gost");
 	private JMenu mnuIzvestaji = new JMenu("Izveštaji");
+	private JMenu Izgled=new JMenu("Izgled");
 	private JMenuItem itemSpisakRacuna = new JMenuItem("Spisak računa zadate banke");
 	private JMenuItem itemDrzave = new JMenuItem("Države");
 	private JMenuItem itemValuta = new JMenuItem("Valuta");
@@ -57,8 +60,25 @@ public class Menu extends JMenuBar {
 	private JMenuItem itemOdjaviSe=new JMenuItem("Odjavi se");
 	private Action actionImportNalog = new ImportNalogZaPlacanjeAction();
 	
+	private void fillLFS(){
+		Map<String, String> lfs = LookAndFeel.list();
+		for(final String className : lfs.keySet()){
+			JMenuItem mn = new JMenuItem(lfs.get(className));
+			mn.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					LookAndFeel.setLookAdnFeel(className);
+				}
+			});
+			Izgled.add(mn);
+		}
+	}
+	
 	public Menu() {
 		super();
+		
+		fillLFS();
 		
 		mnuBanka.add(itemDrzave);
 		mnuBanka.add(itemValuta);
@@ -80,6 +100,7 @@ public class Menu extends JMenuBar {
 		add(mnuBanka);
 		add(mnuOperacije);
 		add(mnuIzvestaji);
+		add(Izgled);
 		add(mnuKorisnik);
 		
 		itemDrzave.addActionListener(new ActionListener() {
