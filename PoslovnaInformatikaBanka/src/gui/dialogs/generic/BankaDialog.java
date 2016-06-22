@@ -90,7 +90,7 @@ public class BankaDialog extends GenericDialog {
 
 		panelRacun.add(tfObracunskiRacun);
 		panelRacun.add(btnGenerisiKontrolniBroj);
-		addComponentToFormInputPanel(panelRacun, "ObraÄ?unski raÄ?un", true);
+		addComponentToFormInputPanel(panelRacun, "ObraÄunski raÄun", true);
 
 		tfNaziv = new JTextField(20);
 		tfNaziv.setName("BANK_NAZIV");
@@ -143,11 +143,11 @@ public class BankaDialog extends GenericDialog {
 			throw new InvalidInputException("Obavezna polja nisu popunjena");
 		if (idBanke.length() != 3)
 			throw new InvalidInputException(
-					"Oznaka banke mora imati taÄ?no 3 cifre");
+					"Oznaka banke mora imati taÄno 3 cifre");
 
 		if (obracnskiRacun.length() != 18)
 			throw new InvalidInputException(
-					"ObraÄ?unski raÄ?un banke mora imati taÄ?no 18 cifara");
+					"ObraÄunski raÄun banke mora imati taÄno 18 cifara");
 
 		if (SwiftKod.length() != 8)
 			throw new InvalidInputException("SWIFT kod mora sadrÅ¾ati 8 cifara");
@@ -165,7 +165,7 @@ public class BankaDialog extends GenericDialog {
 
 		if (!kontrolniBrojGenerisan)
 			throw new InvalidInputException(
-					"Kontrolni broj raÄ?una nije generisan");
+					"Kontrolni broj raÄuna nije generisan");
 
 	}
 

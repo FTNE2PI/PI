@@ -30,6 +30,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	private JTextField tfIDNaloga;
 	private JDigitsTextField tfSifraBankePoverioca;
 	private JDigitsTextField tfSifraBankeDuznika;
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbTipNaloga;
 	private JDatePickerImpl dpDatumNaloga;
 	private JButton btnExport;
@@ -74,7 +75,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 		});
 		panSifraBankePoverioca.add(tfSifraBankePoverioca);
 		panSifraBankePoverioca.add(btnZoom1);
-		addComponentToFormInputPanel(panSifraBankePoverioca, "≈†ifra banke poverioca", true);
+		addComponentToFormInputPanel(panSifraBankePoverioca, "äifra banke poverioca", true);
 		
 		JPanel panSifraBankeDuznika = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tfSifraBankeDuznika = new JDigitsTextField(3, 3, true, true);
@@ -93,7 +94,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 		});
 		panSifraBankeDuznika.add(tfSifraBankeDuznika);
 		panSifraBankeDuznika.add(btnZoom2);
-		addComponentToFormInputPanel(panSifraBankeDuznika, "≈†ifra banke du≈ænika", true);
+		addComponentToFormInputPanel(panSifraBankeDuznika, "äifra banke duûnika", true);
 		
 		String[] items = new String[] {"R", "C"};
 		cbTipNaloga = new JComboBox(items);

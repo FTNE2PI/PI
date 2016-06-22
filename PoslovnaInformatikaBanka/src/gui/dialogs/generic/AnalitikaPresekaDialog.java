@@ -86,7 +86,7 @@ public class AnalitikaPresekaDialog extends GenericDialog {
 		
 		panPrenos2.add(tfBrojRacuna);
 		panPrenos2.add(btnZoom2);
-		addComponentToFormInputPanel(panPrenos2, "Broj raƒ?una", true);
+		addComponentToFormInputPanel(panPrenos2, "Broj raƒçuna", true);
 		addComponentToFormInputPanel(tfDatumNaloga, "Datum naloga", true);
 		addComponentToFormInputPanel(tfBrojIzvoda, "Broj izvoda", true);
 		addComponentToFormInputPanel(tfBrojPreseka, "Broj preseka", true);

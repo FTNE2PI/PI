@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="NalogZaPrenosSaAnalitikom" pageWidth="1100" pageHeight="1000" columnWidth="1060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="63205c38-06a5-4221-99d0-26cac43029f8">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="1427"/>
+	<property name="ireport.y" value="265"/>
+	<parameter name="IDBroj" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="BrojIzvoda" class="java.lang.String"/>
+	<parameter name="BrojRacuna" class="java.lang.String"/>
+	<parameter name="DatumPrometa" class="java.lang.String"/>
+	<parameter name="BrojPreseka" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     PRENOS_IZVODA_PRESEK."L_ID" AS PRENOS_IZVODA_PRESEK_L_ID,
+     PRENOS_IZVODA_PRESEK."BAR_RACUN" AS PRENOS_IZVODA_PRESEK_BAR_RACUN,
+     PRENOS_IZVODA_PRESEK."DSR_IZVOD" AS PRENOS_IZVODA_PRESEK_DSR_IZVOD,
+     PRENOS_IZVODA_PRESEK."DSR_DATUM" AS PRENOS_IZVODA_PRESEK_DSR_DATUM,
+     PRENOS_IZVODA_PRESEK."BNP_PRESEK" AS PRENOS_IZVODA_PRESEK_BNP_PRESEK,
+     PRENOS_IZVODA_PRESEK."BNP_PRETHODNO" AS PRENOS_IZVODA_PRESEK_BNP_PRETHODNO,
+     PRENOS_IZVODA_PRESEK."BNP_BRUKORIST" AS PRENOS_IZVODA_PRESEK_BNP_BRUKORIST,
+     PRENOS_IZVODA_PRESEK."BNP_U_KORIST" AS PRENOS_IZVODA_PRESEK_BNP_U_KORIST,
+     PRENOS_IZVODA_PRESEK."BNP_BRNATERET" AS PRENOS_IZVODA_PRESEK_BNP_BRNATERET,
+     PRENOS_IZVODA_PRESEK."BNP_UKTERET" AS PRENOS_IZVODA_PRESEK_BNP_UKTERET,
+     PRENOS_IZVODA_PRESEK."BNP_NOVOSTANJE" AS PRENOS_IZVODA_PRESEK_BNP_NOVOSTANJE,
+     PRENOS_IZVODA_PRESEK."BNP_BRGRK" AS PRENOS_IZVODA_PRESEK_BNP_BRGRK,
+     PRENOS_IZVODA_PRESEK."BNP_BRGRT" AS PRENOS_IZVODA_PRESEK_BNP_BRGRT,
+     PRENOS_IZVODA_PRESEK."BNP_STATUS" AS PRENOS_IZVODA_PRESEK_BNP_STATUS,
+     ANALITIKA_IZVODA."ASI_BROJSTAVKE" AS ANALITIKA_IZVODA_ASI_BROJSTAVKE,
+     ANALITIKA_IZVODA."VA_SIFRA" AS ANALITIKA_IZVODA_VA_SIFRA,
+     ANALITIKA_IZVODA."ASI_DUZNIK" AS ANALITIKA_IZVODA_ASI_DUZNIK,
+     ANALITIKA_IZVODA."ASI_SVRHA" AS ANALITIKA_IZVODA_ASI_SVRHA,
+     ANALITIKA_IZVODA."ASI_POVERILAC" AS ANALITIKA_IZVODA_ASI_POVERILAC,
+     ANALITIKA_IZVODA."ASI_DATPRI" AS ANALITIKA_IZVODA_ASI_DATPRI,
+     ANALITIKA_IZVODA."ASI_RACDUZ" AS ANALITIKA_IZVODA_ASI_RACDUZ,
+     ANALITIKA_IZVODA."ASI_MODZAD" AS ANALITIKA_IZVODA_ASI_MODZAD,
+     ANALITIKA_IZVODA."ASI_PBZAD" AS ANALITIKA_IZVODA_ASI_PBZAD,
+     ANALITIKA_IZVODA."ASI_RACPOV" AS ANALITIKA_IZVODA_ASI_RACPOV,
+     ANALITIKA_IZVODA."ASI_MODODOB" AS ANALITIKA_IZVODA_ASI_MODODOB,
+     ANALITIKA_IZVODA."ASI_PBODO" AS ANALITIKA_IZVODA_ASI_PBODO,
+     ANALITIKA_IZVODA."ASI_HITNO" AS ANALITIKA_IZVODA_ASI_HITNO,
+     ANALITIKA_IZVODA."ASI_IZNOS" AS ANALITIKA_IZVODA_ASI_IZNOS,
+     ANALITIKA_IZVODA."ASI_TIPGRESKE" AS ANALITIKA_IZVODA_ASI_TIPGRESKE,
+     ANALITIKA_IZVODA."ASI_STATUS" AS ANALITIKA_IZVODA_ASI_STATUS
+FROM
+     "dbo"."PRENOS_IZVODA_PRESEK" PRENOS_IZVODA_PRESEK INNER JOIN "dbo"."ANALITIKA_PRESEKA" ANALITIKA_PRESEKA ON PRENOS_IZVODA_PRESEK."L_ID" = ANALITIKA_PRESEKA."L_ID"
+     AND PRENOS_IZVODA_PRESEK."BNP_PRESEK" = ANALITIKA_PRESEKA."BNP_PRESEK"
+     AND PRENOS_IZVODA_PRESEK."BAR_RACUN" = ANALITIKA_PRESEKA."BAR_RACUN"
+     AND PRENOS_IZVODA_PRESEK."DSR_DATUM" = ANALITIKA_PRESEKA."DSR_DATUM"
+     AND PRENOS_IZVODA_PRESEK."DSR_IZVOD" = ANALITIKA_PRESEKA."DSR_IZVOD"
+     INNER JOIN "dbo"."ANALITIKA_IZVODA" ANALITIKA_IZVODA ON ANALITIKA_PRESEKA."BAR_RACUN" = ANALITIKA_IZVODA."BAR_RACUN"
+     AND ANALITIKA_IZVODA."ASI_BROJSTAVKE" = ANALITIKA_PRESEKA."ASI_BROJSTAVKE"
+     AND ANALITIKA_IZVODA."DSR_IZVOD" = ANALITIKA_PRESEKA."DSR_IZVOD"
+     AND ANALITIKA_IZVODA."DSR_DATUM" = ANALITIKA_PRESEKA."DSR_DATUM"
+WHERE
+     PRENOS_IZVODA_PRESEK."L_ID" = $P{IDBroj}
+     AND PRENOS_IZVODA_PRESEK."BAR_RACUN" = $P{BrojRacuna}
+     AND PRENOS_IZVODA_PRESEK."DSR_IZVOD" = $P{BrojIzvoda}
+     AND PRENOS_IZVODA_PRESEK."DSR_DATUM" = $P{DatumPrometa}
+     AND PRENOS_IZVODA_PRESEK."BNP_PRESEK" = $P{BrojPreseka}]]>
+	</queryString>
+	<field name="PRENOS_IZVODA_PRESEK_L_ID" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BAR_RACUN" class="java.lang.String"/>
+	<field name="PRENOS_IZVODA_PRESEK_DSR_IZVOD" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_DSR_DATUM" class="java.sql.Timestamp"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_PRESEK" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_PRETHODNO" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_BRUKORIST" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_U_KORIST" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_BRNATERET" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_UKTERET" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_NOVOSTANJE" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_BRGRK" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_BRGRT" class="java.math.BigDecimal"/>
+	<field name="PRENOS_IZVODA_PRESEK_BNP_STATUS" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_BROJSTAVKE" class="java.math.BigDecimal"/>
+	<field name="ANALITIKA_IZVODA_VA_SIFRA" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_DUZNIK" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_SVRHA" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_POVERILAC" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_DATPRI" class="java.sql.Timestamp"/>
+	<field name="ANALITIKA_IZVODA_ASI_RACDUZ" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_MODZAD" class="java.math.BigDecimal"/>
+	<field name="ANALITIKA_IZVODA_ASI_PBZAD" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_RACPOV" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_MODODOB" class="java.math.BigDecimal"/>
+	<field name="ANALITIKA_IZVODA_ASI_PBODO" class="java.lang.String"/>
+	<field name="ANALITIKA_IZVODA_ASI_HITNO" class="java.lang.Boolean"/>
+	<field name="ANALITIKA_IZVODA_ASI_IZNOS" class="java.math.BigDecimal"/>
+	<field name="ANALITIKA_IZVODA_ASI_TIPGRESKE" class="java.math.BigDecimal"/>
+	<field name="ANALITIKA_IZVODA_ASI_STATUS" class="java.lang.String"/>
+	<variable name="Hitno" class="java.lang.String">
+		<variableExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_HITNO}.equals("true") ? "Da" : "Ne"]]></variableExpression>
+	</variable>
+	<variable name="StatusIzvoda" class="java.lang.String">
+		<variableExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_STATUS}.equals("E") ? "Evidentiran" : "Poslat"]]></variableExpression>
+	</variable>
+	<variable name="TipGreske" class="java.lang.String">
+		<variableExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_TIPGRESKE}.equals("1") ? "Ispravan" :
+$F{ANALITIKA_IZVODA_ASI_TIPGRESKE}.equals("2") ? "Nelikvidnost" :
+$F{ANALITIKA_IZVODA_ASI_TIPGRESKE}.equals("3") ? "Nepostojeca banka" :
+$F{ANALITIKA_IZVODA_ASI_TIPGRESKE}.equals("8") ? "Pogresan nalog" : "Racun ukinut" ]]></variableExpression>
+	</variable>
+	<variable name="StatusNaloga" class="java.lang.String">
+		<variableExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_STATUS}.equals("P") ? "Poslat" : "Faza formiranja"]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="245" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="99c9ef0c-167f-49aa-9430-ed44fd606789" x="0" y="0" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Datum: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="1a848890-3c7f-4a56-8572-f055fd06b87a" x="37" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6a6e73bd-2382-477c-b823-7e466a5bdd28" x="1012" y="0" width="48" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fdc240ca-1d1f-4d10-b49e-55514abf9a54" x="975" y="0" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Strana: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="28d5574b-d6db-42af-ba68-bc97abcd0928" x="394" y="37" width="314" height="30"/>
+				<textElement>
+					<font size="22"/>
+				</textElement>
+				<text><![CDATA[Nalog za prenos sa analitikom]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="df652f10-b078-4165-b49d-662a5c5a0717" x="473" y="79" width="152" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Prenos izvoda - Presek]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="9be82b89-8d77-4ff5-bfd5-4db98469d1c7" x="0" y="137" width="1060" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="d2da4603-bc24-4513-9827-f811428367c1" x="0" y="117" width="53" height="20"/>
+				<textElement/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="da7e306d-ca9e-4e39-bc58-6c3c91aa8805" x="423" y="117" width="87" height="20"/>
+				<textElement/>
+				<text><![CDATA[Promena u korist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6ff5fde6-e8f5-42f5-a702-fc05ec8d7b3f" x="74" y="117" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Račun]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4ad05905-7ff0-41e2-8b47-c18bdab5aa82" x="190" y="117" width="34" height="20"/>
+				<textElement/>
+				<text><![CDATA[Izvod]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="879c2637-fda0-4f78-b527-b2e7434f69a2" x="241" y="117" width="38" height="20"/>
+				<textElement/>
+				<text><![CDATA[Datum]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="9acbf1eb-202c-4ea9-9eaa-94e37eb1736f" x="296" y="117" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Presek]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c4ba6c97-b0b3-40ff-94d0-39feb00f8cfa" x="351" y="117" width="54" height="20"/>
+				<textElement/>
+				<text><![CDATA[Prethodno stanje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c6de69e7-868d-4214-93f9-9dc053fe6dbd" x="522" y="117" width="66" height="20"/>
+				<textElement/>
+				<text><![CDATA[Ukupno korist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="726c93d8-1fb5-4080-8851-ba269eb91444" x="598" y="117" width="67" height="20"/>
+				<textElement/>
+				<text><![CDATA[Prometa teret]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c4910ebf-e024-4078-ae9d-a439ce27e2e0" x="681" y="117" width="63" height="20"/>
+				<textElement/>
+				<text><![CDATA[Ukupno teret]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="09f84e9c-abb2-4fe0-904e-539f1dc5c63d" x="763" y="117" width="59" height="20"/>
+				<textElement/>
+				<text><![CDATA[Novo stanje]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd91b67a-549e-41d4-a17c-eede2f1d02ec" x="832" y="117" width="67" height="20"/>
+				<textElement/>
+				<text><![CDATA[Grešaka korist]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8456e714-d93c-444e-a771-55150c86dc35" x="906" y="117" width="69" height="20"/>
+				<textElement/>
+				<text><![CDATA[Grešaka teret]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="d79c1390-091a-49ac-8c2a-b1954218c416" x="985" y="117" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="5bf51932-1ce2-4b99-bece-b8ef6af3059b" x="0" y="138" width="53" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_L_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fbd34fd-a962-4b9e-af60-7294c98ef50c" x="74" y="138" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BAR_RACUN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ded9f6cb-c80c-4eda-b85f-ca1ad7b6af01" x="190" y="138" width="34" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_DSR_IZVOD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="29b6406a-e315-4d74-87a5-ec96d9d72f58" x="241" y="138" width="38" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_DSR_DATUM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b17cf197-f3a2-4089-abbf-578041dd4aa1" x="296" y="138" width="37" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_PRESEK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="210bb9ed-32dd-43d3-a1ce-483b065d713b" x="351" y="138" width="54" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_PRETHODNO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f884136b-8353-4897-8571-dde0ccfe2e57" x="423" y="138" width="87" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_BRUKORIST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e89cd266-0755-4251-940a-0717e989d72d" x="522" y="138" width="66" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_U_KORIST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9e877ba6-3e93-4e04-b375-a2e940c3dea5" x="598" y="138" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_BRNATERET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8625424c-8ba8-4308-9ca3-efd27aa9933c" x="681" y="138" width="63" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_UKTERET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bdd822ea-caea-4609-9259-5ee28bcfb434" x="763" y="138" width="59" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_NOVOSTANJE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="dd4245d2-0e32-4a2a-8679-9a801daa5d79" x="832" y="138" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_BRGRK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="db071cd3-2ab9-4965-93b5-b6ac0ab9d5ac" x="906" y="138" width="69" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_BRGRT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fe121b6a-a8a4-4be9-8c07-03a0cb3ffec2" x="497" y="175" width="117" height="20"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Analitika izvoda]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="149673d3-94e3-4db1-9f14-f8f4f852322a" x="0" y="243" width="1060" height="1"/>
+			</line>
+			<staticText>
+				<reportElement uuid="1d6e6de0-0eb4-4049-9f0f-a32f10bed9b0" x="0" y="223" width="74" height="20"/>
+				<textElement/>
+				<text><![CDATA[Broj stavke]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="58a445d3-6bd6-4583-ba31-eb2dee5eb881" x="93" y="223" width="56" height="20"/>
+				<textElement/>
+				<text><![CDATA[Šifra valute]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="0d695415-4ac5-4ad4-afdb-9e6ab0ff7c93" x="168" y="223" width="56" height="20"/>
+				<textElement/>
+				<text><![CDATA[Dužnik]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5e0ac5de-e528-4add-9b91-ed341ab6e772" x="253" y="223" width="80" height="20"/>
+				<textElement/>
+				<text><![CDATA[Svrha uplate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1b3b013a-7efa-4f12-b0dd-64f71c7608ba" x="351" y="223" width="72" height="20"/>
+				<textElement/>
+				<text><![CDATA[Poverilac]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="35158d01-b381-4e45-8dee-f99528547a18" x="438" y="223" width="72" height="20"/>
+				<textElement/>
+				<text><![CDATA[Datum prijema]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="93baeee8-4210-4742-96a4-b5c2506e83cd" x="532" y="223" width="103" height="20"/>
+				<textElement/>
+				<text><![CDATA[Račun dužnika]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8690968a-3e49-45c6-b85c-edfe621b6a5f" x="658" y="224" width="86" height="20"/>
+				<textElement/>
+				<text><![CDATA[Račun poverioca]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a4f01e4a-1d18-4620-ab35-d2855f90e616" x="775" y="223" width="25" height="20"/>
+				<textElement/>
+				<text><![CDATA[Hitno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="23f0a50f-2cfc-4b17-bbb9-d9a26d245b77" x="811" y="223" width="78" height="20"/>
+				<textElement/>
+				<text><![CDATA[Iznos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="25e611b4-98d0-4ddf-ab26-5bbae3f7407f" x="899" y="223" width="76" height="20"/>
+				<textElement/>
+				<text><![CDATA[Tip greške]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f16b3097-5e01-40dd-86b5-84ae2feeec4f" x="985" y="223" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d95099a3-981d-4d00-81d4-c355ec76f320" x="985" y="138" width="75" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PRENOS_IZVODA_PRESEK_BNP_STATUS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement uuid="df550db4-6aec-4946-a516-2059655b963e" x="0" y="0" width="74" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_BROJSTAVKE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="696aef0d-93f6-44e1-b386-b0e98c31264b" x="93" y="0" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_VA_SIFRA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="296fe44e-2dac-4898-a1c8-8b1779133f96" x="168" y="0" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_DUZNIK}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da72eb8f-be47-49b1-9004-ced156494a3a" x="253" y="0" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_SVRHA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="15b7960c-b14d-47aa-9708-c5483204c01c" x="351" y="0" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_POVERILAC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="774611ae-2e1f-4155-851b-827c90b7b7c7" x="438" y="0" width="72" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_DATPRI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="66b98596-cd66-4270-af7b-ee78bf02834f" x="532" y="0" width="103" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_RACDUZ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f71acebb-58f0-433e-8e57-a2cc3ad658b4" x="658" y="0" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_RACPOV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78b6122b-438e-4c94-9822-c78003392b62" x="775" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{Hitno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="93612497-dd4e-4cae-aa85-d3caa7ed2de5" x="985" y="0" width="75" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{StatusIzvoda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5a1d2446-8181-48b8-827a-acdb275d22b6" x="811" y="0" width="78" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ANALITIKA_IZVODA_ASI_IZNOS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="df4bd3c2-3d29-4958-a1fc-7460e1805971" x="899" y="0" width="76" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$V{TipGreske}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

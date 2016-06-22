@@ -80,7 +80,7 @@ public class PrenosIzvodaPresekDialog extends GenericDialog {
 			          
 			          JasperViewer jpv = new JasperViewer(jp,false);
 			          //JasperViewer.viewReport(jp, false);
-			          jpv.setSize(1000, 800);
+			          jpv.setSize(1300, 800);
 			          jpv.setVisible(true);
 			          jpv.toFront();
 			        } catch (Exception ex) {
@@ -139,7 +139,7 @@ public class PrenosIzvodaPresekDialog extends GenericDialog {
 		});
 		panBrojRacuna.add(tfBrojRacuna);
 		panBrojRacuna.add(btnZoom2);
-		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒ?una", false);
+		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒçuna", false);
 		
 		tfBrojPreseka = new JDigitsTextField(2, 2, true, true);
 		tfBrojPreseka.setName("BNP_PRESEK");

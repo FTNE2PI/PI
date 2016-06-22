@@ -69,15 +69,15 @@ public class PoslovnoLiceDialog extends GenericDialog {
 		
 		tfJMBGFizickogLica=new JDigitsTextField(10,13,false,true);
 		tfJMBGFizickogLica.setName("L_JMBG");
-		addComponentToFormInputPanel(tfJMBGFizickogLica, "JMBG fiziiÄ?kog lica",false);
+		addComponentToFormInputPanel(tfJMBGFizickogLica, "JMBG fiziÄkog lica",false);
 		
 		tfImeFizickogLica=new JTextField(10);
 		tfImeFizickogLica.setName("L_IME");
-		addComponentToFormInputPanel(tfImeFizickogLica, "Ime fiziiÄ?kog lica",false);
+		addComponentToFormInputPanel(tfImeFizickogLica, "Ime fiziÄkog lica",false);
 		
 		tfPrezimeFizickogLica=new JTextField(10);
 		tfPrezimeFizickogLica.setName("L_PREZIME");
-		addComponentToFormInputPanel(tfPrezimeFizickogLica, "Prezime fiziiÄ?kog lica",false);
+		addComponentToFormInputPanel(tfPrezimeFizickogLica, "Prezime fiziÄkog lica",false);
 		
 		tfPIBPravnogLica=new JDigitsTextField(8, 10, false, true);
 		tfPIBPravnogLica.setName("L_PIB");
@@ -139,7 +139,7 @@ public class PoslovnoLiceDialog extends GenericDialog {
 		
 		if (jmbg.trim().length()>0)
 			if (jmbg.length()!=13)
-			throw new InvalidInputException("JMBG mora imati taÄ?no 13 cifara");
+			throw new InvalidInputException("JMBG mora imati taÄno 13 cifara");
 		
 	}
 

@@ -87,7 +87,7 @@ public class KursnaListaDialog extends GenericDialog {
 		panBanka.add(tfSifraBanke);
 		panBanka.add(btnZoom);
 		panBanka.add(tfNazivBanke);
-		addComponentToFormInputPanel(panBanka, "Å ifra banke", true);
+		addComponentToFormInputPanel(panBanka, "Šifra banke", true);
 		
 		JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JDatePanelImpl datePanel1 = new JDatePanelImpl(new UtilDateModel());

@@ -22,6 +22,8 @@ import db.DBConnection;
 
 public class GeneratePresekAction extends AbstractAction {
 
+	
+	private static final long serialVersionUID = 1L;
 	private DnevnoStanjeRacunaDialog dialog;
 	
 	public GeneratePresekAction(DnevnoStanjeRacunaDialog dialog){
@@ -50,7 +52,7 @@ public class GeneratePresekAction extends AbstractAction {
 					idLica = rsetIdLica.getInt(1);
 				}
 				else
-					throw new SQLException("Nije nađen ra�?un i id poslovnog lica u tabeli RACUN_POSLOVNIH_LICA.");
+					throw new SQLException("Nije nadjen racun i id poslovnog lica u tabeli RACUN_POSLOVNIH_LICA.");
 				
 				CallableStatement proc = DBConnection.getConnection().prepareCall(
 						"{ call GENERATE_PRESEK(?,?,?,?,?,?)}");
@@ -71,7 +73,7 @@ public class GeneratePresekAction extends AbstractAction {
 					message = "Izgenerisan je " + odgovor + " presek";
 				else
 					message = "Izgenerisano je " + odgovor + " preseka";
-				JOptionPane.showMessageDialog(dialog, message, "Završena operacija", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(dialog, message, "Zavrsena operacija", JOptionPane.INFORMATION_MESSAGE);
 			
 			
 			}catch(SQLException e1){

@@ -64,7 +64,7 @@ public class KursUValutiDialog extends GenericDialog {
 		});
 		panBanka.add(tfSifraBanke);
 		panBanka.add(btnZoom1);
-		addComponentToFormInputPanel(panBanka, "Å ifra banke", true);
+		addComponentToFormInputPanel(panBanka, "Šifra banke", true);
 		addComponentToFormInputPanel(tfDatum, "Datum", true);
 		
 		tfRedniBr = new JDigitsTextField(2, 2, true, false);
@@ -89,7 +89,7 @@ public class KursUValutiDialog extends GenericDialog {
 		});
 		panSifraValutePrema.add(tfSifraValutePrema);
 		panSifraValutePrema.add(btnZoom2);
-		addComponentToFormInputPanel(panSifraValutePrema, "Å ifra valute prema", true);
+		addComponentToFormInputPanel(panSifraValutePrema, "Šifra valute prema", true);
 		
 		JPanel panSifraOsnovneValute = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tfSifraOsnovneValute = new JLimitTextField(3, 3);
@@ -109,7 +109,7 @@ public class KursUValutiDialog extends GenericDialog {
 		});
 		panSifraOsnovneValute.add(tfSifraOsnovneValute);
 		panSifraOsnovneValute.add(btnZoom3);
-		addComponentToFormInputPanel(panSifraOsnovneValute, "Å ifra osnovne valute", true);
+		addComponentToFormInputPanel(panSifraOsnovneValute, "Šifra osnovne valute", true);
 		
 		tfKupovni = new JIznosTextField(13, 9, 4, false);
 		tfKupovni.setName("KLS_KUPOVNI");

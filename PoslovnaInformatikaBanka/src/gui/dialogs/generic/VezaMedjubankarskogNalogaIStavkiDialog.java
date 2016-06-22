@@ -30,7 +30,7 @@ public class VezaMedjubankarskogNalogaIStavkiDialog extends GenericDialog {
 	private JTextField tfIDNaloga;
 
 	public VezaMedjubankarskogNalogaIStavkiDialog(JFrame parent) {
-		super(parent, "Veza međubankarskog naloga i stavki", "VEZA_MEDJUBANKARSKOG_NALOGA_I_STAVKI", true);
+		super(parent, "Veza meÄ‘ubankarskog naloga i stavki", "VEZA_MEDJUBANKARSKOG_NALOGA_I_STAVKI", true);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class VezaMedjubankarskogNalogaIStavkiDialog extends GenericDialog {
 		});
 		panBrojRacuna.add(tfBrojRacuna);
 		panBrojRacuna.add(btnZoom1);
-		addComponentToFormInputPanel(panBrojRacuna, "Broj ra�?una", false);
+		addComponentToFormInputPanel(panBrojRacuna, "Broj računa", false);
 		
 		tfBrojIzvoda = new JDigitsTextField(3, 3, true, true);
 		tfBrojIzvoda.setName("DSR_IZVOD");

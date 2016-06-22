@@ -21,6 +21,8 @@ import org.eclipse.jdt.core.compiler.InvalidInputException;
 
 public class ValutaDialog extends GenericDialog {
 
+	
+	private static final long serialVersionUID = 1L;
 	private JLimitTextField tfSifraValute;
 	private JTextField tfNaziv;
 	private JLimitTextField tfSifraDrzave;
@@ -38,7 +40,7 @@ public class ValutaDialog extends GenericDialog {
 		
 		tfSifraValute = new JLimitTextField(3, 3);
 		tfSifraValute.setName("VA_SIFRA");
-		addComponentToFormInputPanel(tfSifraValute, "≈†ifra valute",true);
+		addComponentToFormInputPanel(tfSifraValute, "äifra valute",true);
 		
 		
 		tfNaziv = new JTextField(20);
@@ -78,7 +80,7 @@ public class ValutaDialog extends GenericDialog {
 		panDrzavaLookUp.add(tfSifraDrzave);
 		panDrzavaLookUp.add(btnDrzava);
 		panDrzavaLookUp.add(tfNazivDrzave);
-		addComponentToFormInputPanel(panDrzavaLookUp, "≈†ifra dr≈æave",true);
+		addComponentToFormInputPanel(panDrzavaLookUp, "äifra drûave",true);
 
 //		formInputPanel.add(panDrzavaLookUp);
 //		formInputPanel.add(Box.createHorizontalStrut(5));

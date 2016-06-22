@@ -53,7 +53,7 @@ public class UkidanjeDialog extends GenericDialog {
 		});
 		panBrojRacuna.add(tfBrojRacuna);
 		panBrojRacuna.add(btnZoom);
-		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒ?una", true);
+		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒçuna", true);
 		
 		JPanel panDatum = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JDatePanelImpl datePanel = new JDatePanelImpl(new UtilDateModel());
@@ -87,7 +87,7 @@ public class UkidanjeDialog extends GenericDialog {
 		
 		tfRacunPrenosa = new JDigitsTextField(14, 20, false, true);
 		tfRacunPrenosa.setName("UK_NARACUN");
-		addComponentToFormInputPanel(tfRacunPrenosa, "Sredstva se prenose na raƒ?un", true);
+		addComponentToFormInputPanel(tfRacunPrenosa, "Sredstva se prenose na raƒçun", true);
 
 	}
 
@@ -100,7 +100,7 @@ public class UkidanjeDialog extends GenericDialog {
 			throw new InvalidInputException("Obavezna polja nisu popunjena");
 		
 		if (racunPrenosa.length()!=18)
-			throw new InvalidInputException("Raƒ?un na koji se sredstva prenose mora imati 18 cifara");
+			throw new InvalidInputException("Raƒçun na koji se sredstva prenose mora imati 18 cifara");
 	}
 
 }

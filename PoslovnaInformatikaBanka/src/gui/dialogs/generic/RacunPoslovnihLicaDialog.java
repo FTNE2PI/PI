@@ -43,7 +43,7 @@ public class RacunPoslovnihLicaDialog extends GenericDialog {
 	private JDatePickerImpl dpDatum;
 	
 	public RacunPoslovnihLicaDialog(JFrame parent) {
-		super(parent, "RaÄ?un poslovnih lica", "RACUN_POSLOVNIH_LICA", false);
+		super(parent, "RaÄun poslovnih lica", "RACUN_POSLOVNIH_LICA", false);
 
 		btnDelete.setIcon(new ImageIcon("images/delete2a.gif"));
 		btnDelete.setVisible(false);
@@ -106,7 +106,7 @@ public class RacunPoslovnihLicaDialog extends GenericDialog {
 		JPanel panelRacun = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		panelRacun.add(tfBrojRacuna);
 		panelRacun.add(btnGenerisiKontrolniBroj);
-		addComponentToFormInputPanel(panelRacun, "Broj raÄ?una", true);
+		addComponentToFormInputPanel(panelRacun, "Broj raÄuna", true);
 		
 		
 		
@@ -228,14 +228,14 @@ public class RacunPoslovnihLicaDialog extends GenericDialog {
 			throw new InvalidInputException("Obavezna polja nisu popunjena");
 		
 		if (brojRacuna.length()!=18)
-			throw new InvalidInputException("RaÄ?un mora imati taÄ?no 18 cifara");
+			throw new InvalidInputException("RaÄun mora imati taÄno 18 cifara");
 		String prvaTriZnakaRacuna=brojRacuna.substring(0,3 );
 		
 		if (!(prvaTriZnakaRacuna.equals(sifraBanke)))
-			throw new InvalidInputException("Prve tri cifre raÄ?una moraju biti iste kao Å¡ifra banke");	
+			throw new InvalidInputException("Prve tri cifre raÄuna moraju biti iste kao Å¡ifra banke");	
 		if (!kontrolniBrojGenerisan)
 			throw new InvalidInputException(
-					"Kontrolni broj raÄ?una nije generisan");
+					"Kontrolni broj raÄuna nije generisan");
 	}
 
 }

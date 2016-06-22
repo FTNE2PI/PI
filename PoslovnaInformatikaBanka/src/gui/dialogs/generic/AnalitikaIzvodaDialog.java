@@ -82,7 +82,7 @@ public class AnalitikaIzvodaDialog extends GenericDialog {
 		
 		panBrojRacuna.add(tfBrojRacuna);
 		panBrojRacuna.add(btnZoom1);
-		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒ?una", true);
+		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒçuna", true);
 		addComponentToFormInputPanel(tfBrojIzvoda, "Broj izvoda", true);
 		
 		JPanel panDatumPrometa = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -161,7 +161,7 @@ public class AnalitikaIzvodaDialog extends GenericDialog {
 		
 		tfRacunDuznika = new JDigitsTextField(14, 18, false, true);
 		tfRacunDuznika.setName("ASI_RACDUZ");
-		addComponentToFormInputPanel(tfRacunDuznika, "Raƒ?un du≈ænika", true);
+		addComponentToFormInputPanel(tfRacunDuznika, "Raƒçun du≈ænika", true);
 		
 		tfModelZaduzenja = new JDigitsTextField(2, 2, true, true);
 		tfModelZaduzenja.setName("ASI_MODZAD");
@@ -173,7 +173,7 @@ public class AnalitikaIzvodaDialog extends GenericDialog {
 		
 		tfRacunPoverioca = new JDigitsTextField(14, 18, false, true);
 		tfRacunPoverioca.setName("ASI_RACPOV");
-		addComponentToFormInputPanel(tfRacunPoverioca, "Raƒ?un poverioca", true);
+		addComponentToFormInputPanel(tfRacunPoverioca, "Raƒçun poverioca", true);
 		
 		tfModelOdobrenja = new JDigitsTextField(2, 2, true, true);
 		tfModelOdobrenja.setName("ASI_MODODOB");

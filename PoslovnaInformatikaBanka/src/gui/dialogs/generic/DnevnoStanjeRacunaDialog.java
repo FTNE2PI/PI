@@ -34,7 +34,7 @@ public class DnevnoStanjeRacunaDialog extends GenericDialog {
 	JButton btnGeneratePresek;
 	
 	public DnevnoStanjeRacunaDialog(JFrame parent) {
-		super(parent, "Dnevno stanje raƒ?una", "DNEVNO_STANJE_RACUNA", true);
+		super(parent, "Dnevno stanje raƒçuna", "DNEVNO_STANJE_RACUNA", true);
 		formButtonsPanel.add(btnGeneratePresek, 0);
 	}
 
@@ -60,7 +60,7 @@ public class DnevnoStanjeRacunaDialog extends GenericDialog {
 		});
 		panBrojRacuna.add(tfBrojRacuna);
 		panBrojRacuna.add(btnZoom);
-		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒ?una", true);
+		addComponentToFormInputPanel(panBrojRacuna, "Broj raƒçuna", true);
 		
 		tfBrojIzvoda = new JDigitsTextField(3, 3, true, true);
 		tfBrojIzvoda.setName("DSR_IZVOD");

@@ -369,6 +369,7 @@ public abstract class GenericDialog extends JDialog {
 		}
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private int emptyTextFieldRecursive(JPanel currentPanel, int currentIndex) {
 		for (int i = 0; i < currentPanel.getComponentCount(); i++) {
 			Component c1 = currentPanel.getComponent(i);
@@ -480,6 +481,7 @@ public abstract class GenericDialog extends JDialog {
 		return (GenericTableModel) tableGrid.getModel();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void getVectorWithComponentValueRecursive(Vector<Object> values,
 			JPanel currentPanel) {
 		Vector<String> lookUpNames = getGenTableModel().getTableProperties()
