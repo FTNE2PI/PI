@@ -39,7 +39,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	
 	public MedjubankarskiNalogDialog(JFrame parent) {
 		
-		super(parent, "Međubankarski nalog", "MEDJUBANKARSKI_NALOG", true);
+		super(parent, "Medjubankarski nalog", "MEDJUBANKARSKI_NALOG", true);
 		btnExport.setVisible(false);
 		formButtonsPanel.add(btnExport, 0);
 		

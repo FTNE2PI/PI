@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified"
-	targetNamespace="http://informatika.ftn.uns.ac.rs/xws/tim1/RTGSnalog"
-	xmlns="http://informatika.ftn.uns.ac.rs/xws/tim1/RTGSnalog">
+	targetNamespace="http://banka.com/RTGSnalog"
+	xmlns="http://banka.com/RTGSnalog">
 	<xs:element name="RTGS_nalog" type="RTGSNalog" />
 	<xs:complexType name="RTGSNalog">
 		<xs:sequence>

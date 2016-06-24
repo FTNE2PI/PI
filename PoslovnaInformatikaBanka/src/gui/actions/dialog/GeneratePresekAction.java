@@ -78,7 +78,7 @@ public class GeneratePresekAction extends AbstractAction {
 			
 			}catch(SQLException e1){
 				JOptionPane.showMessageDialog(MainFrame.getInstance(), 
-						"Desila se neo�?ekivana greška sa bazom podataka, molimo vas da kontaktirate administratora sistema: \n" +
+						"Desila se neočekivana greška sa bazom podataka, molimo vas da kontaktirate administratora sistema: \n" +
 							e1.getMessage(), 
 						"Greška sa bazom podataka", JOptionPane.ERROR_MESSAGE);
 			} catch(Exception e1) {
@@ -93,8 +93,8 @@ public class GeneratePresekAction extends AbstractAction {
 		}
 		else
 			JOptionPane.showMessageDialog(MainFrame.getInstance(), 
-					"Desila se neo�?ekivana greška, vraćeno je da nije selektovan nijedan red u tabeli. \n",
-					"Neo�?ekivana greška", JOptionPane.ERROR_MESSAGE);
+					"Desila se neočekivana greška, vraćeno je da nije selektovan nijedan red u tabeli. \n",
+					"Neočekivana greška", JOptionPane.ERROR_MESSAGE);
 		
 	}
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified"
-	targetNamespace="http://informatika.ftn.uns.ac.rs/xws/tim1/presekIzvoda"
-	xmlns="http://informatika.ftn.uns.ac.rs/xws/tim1/presekIzvoda">
+	targetNamespace="http://banka.com/presekIzvoda"
+	xmlns="http://banka.com/presekIzvoda">
 
 	<xs:element name="Presek_izvoda" type="PresekIzvoda" />
 	<xs:complexType name="PresekIzvoda">

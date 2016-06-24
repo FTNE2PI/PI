@@ -142,24 +142,24 @@ public class ImportNalogZaPlacanje {
 				idBankeDuznika = CurrentBank.getId();
 				RacunPostojiOdgovor odgovor = doesRacunExistInOurBank(racunDuznika);
 				if(odgovor == RacunPostojiOdgovor.POSTOJI){
-					response.append("Ra�?un dužnika se nalazi u našoj banci\n");
+					response.append("Račun dužnika se nalazi u našoj banci\n");
 					postojiRacunDuznika = true;
 				}
 				else if(odgovor == RacunPostojiOdgovor.NE_POSTOJI && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAŽNJA: Ra�?un dužnika bi trebao da se nalazi u banci, ali nije nađen.\n");
+					response.append("PAÅ½NJA: Račun dužnika bi trebao da se nalazi u banci, ali nije naÄ‘en.\n");
 					tipGreske = ErrorType.POGRESAN_NALOG;
 				}
 				else if(odgovor == RacunPostojiOdgovor.UKINUT_JE && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAŽNJA: Ra�?un dužnika je ukinut.\n");
+					response.append("PAÅ½NJA: Račun dužnika je ukinut.\n");
 					tipGreske = ErrorType.RACUN_UKINUT;
 				}
 			}
 			else{
-				response.append("Ra�?un dužnika se nalazi u drugoj banci\n");
+				response.append("Račun dužnika se nalazi u drugoj banci\n");
 			}
 		}
 		else{
-			response.append("PAŽNJA: Banka duznika nije nadjena u nasoj bazi podataka!\n");
+			response.append("PAÅ½NJA: Banka duznika nije nadjena u nasoj bazi podataka!\n");
 			if(tipGreske == ErrorType.ISPRAVAN)
 				tipGreske = ErrorType.NEPOSTOJECA_BANKA_RACUNA;
 		}
@@ -169,40 +169,40 @@ public class ImportNalogZaPlacanje {
 				idBankePoverioca = CurrentBank.getId();
 				RacunPostojiOdgovor odgovor = doesRacunExistInOurBank(racunPoverioca);
 				if(odgovor == RacunPostojiOdgovor.POSTOJI){
-					response.append("Ra�?un poverioca se nalazi u našoj banci\n");
+					response.append("Račun poverioca se nalazi u našoj banci\n");
 					postojiRacunPoverioca = true;
 				}
 				else if(odgovor == RacunPostojiOdgovor.NE_POSTOJI && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAŽNJA: Ra�?un poverioca bi trebao da se nalazi u banci, ali nije nađen.\n");
+					response.append("PAÅ½NJA: Račun poverioca bi trebao da se nalazi u banci, ali nije naÄ‘en.\n");
 					tipGreske = ErrorType.POGRESAN_NALOG;
 				}
 				else if(odgovor == RacunPostojiOdgovor.UKINUT_JE && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAŽNJA: Ra�?un poverioca je ukinut!\n");
+					response.append("PAÅ½NJA: Račun poverioca je ukinut!\n");
 					tipGreske = ErrorType.RACUN_UKINUT;
 				}
 				
 			}
 			else{
-				response.append("Ra�?un poverioca se nalazi u drugoj banci\n");
+				response.append("Račun poverioca se nalazi u drugoj banci\n");
 			}
 		}
 		else{
-			response.append("PAŽNJA: Banka poverioca nije nadjena u nasoj bazi podataka!\n");
+			response.append("PAÅ½NJA: Banka poverioca nije nadjena u nasoj bazi podataka!\n");
 			if(tipGreske == ErrorType.ISPRAVAN)
 				tipGreske = ErrorType.NEPOSTOJECA_BANKA_RACUNA;
 		}
 		
 		if(!postojiRacunDuznika && !postojiRacunPoverioca)
-			throw new InvalidNalogZaPlacanjeException("Ni jedan ni drugi ra�?un ne pripada našoj banci");
+			throw new InvalidNalogZaPlacanjeException("Ni jedan ni drugi račun ne pripada našoj banci");
 		
 		//Provera valuta u racunima
 		if(postojiRacunDuznika){
 			if(!checkOznakaValuteURacunu(oznakaValute, racunDuznika))
-				throw new InvalidNalogZaPlacanjeException("Ne odgovara valuta ra�?unu dužnika");
+				throw new InvalidNalogZaPlacanjeException("Ne odgovara valuta računu dužnika");
 		}
 		if(postojiRacunPoverioca){
 			if(!checkOznakaValuteURacunu(oznakaValute, racunPoverioca))
-				throw new InvalidNalogZaPlacanjeException("Ne odgovara valuta ra�?unu poverioca");
+				throw new InvalidNalogZaPlacanjeException("Ne odgovara valuta računu poverioca");
 		}
 		
 		//System.out.println("Stari datum valute: " + datumValute);
@@ -224,7 +224,7 @@ public class ImportNalogZaPlacanje {
 		if(postojiRacunDuznika && tipGreske == ErrorType.ISPRAVAN){
 			isDovoljnoNovcaDuznik = dovoljnoNovcaNaRacunuDuznika(racunDuznika, datumValute, iznos);
 			if(!isDovoljnoNovcaDuznik){
-				response.append("PAŽNJA: Ra�?un dužnika nema dovoljno novca na ra�?unu za izvršenje naloga\n");
+				response.append("PAŽNJA: Račun dužnika nema dovoljno novca na računu za izvršenje naloga\n");
 				tipGreske = ErrorType.NELIKVIDNOST_PODRACUNA_KORISNIKA;
 			}
 		}
@@ -233,11 +233,11 @@ public class ImportNalogZaPlacanje {
 		//Azuriranje stanja racuna
 		if(postojiRacunDuznika && tipGreske == ErrorType.ISPRAVAN){
 			azurirajRacun(racunDuznika, datumValute, iznos, AzurirajRacunTip.DUZNIK);
-			response.append("Uspešno ažuriran ra�?un dužnika\n");
+			response.append("Uspešno ažuriran račun dužnika\n");
 		}
 		if(postojiRacunPoverioca && tipGreske == ErrorType.ISPRAVAN){
 			azurirajRacun(racunPoverioca, datumValute, iznos, AzurirajRacunTip.POVERILAC);
-			response.append("Uspešno ažuriran ra�?un poverioca\n");
+			response.append("Uspešno ažuriran račun poverioca\n");
 		}
 		
 		if(tipGreske == ErrorType.ISPRAVAN)
@@ -249,12 +249,12 @@ public class ImportNalogZaPlacanje {
 		if(postojiRacunDuznika){
 			brojStavkeAnalitikeDuznika = insertAnalitikaIzvoda(racunDuznika, datumValute, BROJ_IZVODA, nalog, tipGreske);
 			DBConnection.getConnection().commit();
-			response.append("Uspešno je unesen slog analitike izvoda za ra�?un dužnika.\n");
+			response.append("Uspešno je unesen slog analitike izvoda za račun dužnika.\n");
 		}
 		if(postojiRacunPoverioca){
 			brojStavkeAnalitikePoverioca = insertAnalitikaIzvoda(racunPoverioca, datumValute, BROJ_IZVODA, nalog, tipGreske);
 			DBConnection.getConnection().commit();
-			response.append("Uspešno je unesen slog analitike izvoda za ra�?un poverioca.\n");
+			response.append("Uspešno je unesen slog analitike izvoda za račun poverioca.\n");
 		}
 		
 		//Medjubankarski nalog
@@ -272,7 +272,7 @@ public class ImportNalogZaPlacanje {
 		    DBConnection.getConnection().commit();
 		    
 			//System.out.println("USPESNO IZVRSENO GENERISANJE RTGS NALOGA ZA POVERIOCA: TIP_NALOGA = " + tipNaloga);
-			response.append("Uspešno je kreiran međubankarski ");
+			response.append("Uspešno je kreiran medjubankarski ");
 			if(tipNaloga.equals("R"))
 				response.append("RTGS ");
 			else if(tipNaloga.equals("C"))
@@ -295,7 +295,7 @@ public class ImportNalogZaPlacanje {
 		    DBConnection.getConnection().commit();
 		    
 			//System.out.println("USPESNO IZVRSENO GENERISANJE RTGS NALOGA ZA DUZNIKA: TIP_NALOGA = " + tipNaloga);
-			response.append("Uspešno je kreiran međubankarski ");
+			response.append("Uspešno je kreiran medjubankarski ");
 			if(tipNaloga.equals("R"))
 				response.append("RTGS ");
 			else if(tipNaloga.equals("C"))
@@ -308,13 +308,13 @@ public class ImportNalogZaPlacanje {
 		if(tipGreske == ErrorType.ISPRAVAN)
 			response.append("i nalog je ispravan");
 		if(tipGreske == ErrorType.NELIKVIDNOST_PODRACUNA_KORISNIKA)
-			response.append("uz grešku: nelikvidnosti podra�?una korisnika");
+			response.append("uz grešku: nelikvidnosti podračuna korisnika");
 		if(tipGreske == ErrorType.NEPOSTOJECA_BANKA_RACUNA)
-			response.append("uz grešku: nepostojeća banka ra�?una");
+			response.append("uz grešku: nepostojeÄ‡a banka računa");
 		if(tipGreske == ErrorType.POGRESAN_NALOG)
 			response.append("uz grešku: pogrešan nalog");
 		if(tipGreske == ErrorType.RACUN_UKINUT)
-			response.append("uz grešku: ra�?un ukinut");
+			response.append("uz grešku: račun ukinut");
 		
 		return response.toString();
 		
@@ -354,7 +354,7 @@ public class ImportNalogZaPlacanje {
 			else
 				odgovor = RacunPostojiOdgovor.UKINUT_JE;
 			if(rset.next()){
-				throw new SQLException("Vraceno je više od jednog ra�?una!");
+				throw new SQLException("Vraceno je više od jednog računa!");
 			}
 		}
 		else

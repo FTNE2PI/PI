@@ -126,7 +126,7 @@ public class ExportMedjubankarskiNalog {
 			}
 		}
 		else
-			throw new SQLException("Nije nadjen traženi međubankarski nalog");
+			throw new SQLException("Nije nadjen tra�eni medjubankarski nalog");
 		rset.close();
 		stmt.close();
 		
@@ -151,7 +151,7 @@ public class ExportMedjubankarskiNalog {
 			nalog.setObracunskiRacunBankePoverioca(rset.getString(4));
 		}
 		else
-			throw new SQLException("Nije nadjen traženi međubankarski nalog");
+			throw new SQLException("Nije nadjen tra�eni medjubankarski nalog");
 		rset.close();
 		stmt.close();
 		
@@ -191,7 +191,7 @@ public class ExportMedjubankarskiNalog {
 			
 		}
 		else
-			throw new SQLException("Nije nadjen traženi međubankarski nalog");
+			throw new SQLException("Nije nadjen tra�eni medjubankarski nalog");
 		rset.close();
 		stmt.close();
 		
@@ -243,7 +243,7 @@ public class ExportMedjubankarskiNalog {
 			}
 		}
 		else
-			throw new SQLException("Nije nadjen traženi međubankarski nalog");
+			throw new SQLException("Nije nadjen tra�eni medjubankarski nalog");
 		rset.close();
 		stmt.close();
 		

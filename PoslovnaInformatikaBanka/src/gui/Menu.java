@@ -3,7 +3,6 @@ package gui;
 import gui.actions.ImportNalogZaPlacanjeAction;
 import gui.dialogs.LoginDialog;
 import gui.dialogs.generic.AnalitikaIzvodaDialog;
-import gui.dialogs.generic.AnalitikaPresekaDialog;
 import gui.dialogs.generic.BankaDialog;
 import gui.dialogs.generic.DnevnoStanjeRacunaDialog;
 import gui.dialogs.generic.DrzavaDialog;
@@ -11,7 +10,6 @@ import gui.dialogs.generic.KursUValutiDialog;
 import gui.dialogs.generic.KursnaListaDialog;
 import gui.dialogs.generic.MedjubankarskiNalogDialog;
 import gui.dialogs.generic.PoslovnoLiceDialog;
-import gui.dialogs.generic.PrenosIzvodaPresekDialog;
 import gui.dialogs.generic.RacunPoslovnihLicaDialog;
 import gui.dialogs.generic.UkidanjeDialog;
 import gui.dialogs.generic.ValutaDialog;
@@ -28,10 +26,10 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import utils.LookAndFeel;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+import utils.LookAndFeel;
 import db.DBConnection;
 
 @SuppressWarnings("serial")
@@ -51,9 +49,7 @@ public class Menu extends JMenuBar {
 	private JMenuItem itemPoslovnoLice = new JMenuItem("Poslovno lice");
 	private JMenuItem itemRacunPoslovnihLica = new JMenuItem("Račun poslovnih lica"); 
 	private JMenuItem itemUkidanje = new JMenuItem("Ukidanje");
-	private JMenuItem itemPrenosIzvodaPresek = new JMenuItem("Prenos izvoda presek");
 	private JMenuItem itemDnevnoStanjeRacuna=new JMenuItem("Dnevno stanje računa");
-	private JMenuItem itemAnalitikaPreseka=new JMenuItem("Analitika preseka");
 	private JMenuItem itemAnalitikaIzvoda=new JMenuItem("Analitika izvoda");
 	private JMenuItem itemMedjubankarskiNalog = new JMenuItem("Međubankarski nalog");
 	private JMenuItem itemVezaMedjubankarskogNalogaIStavke = new JMenuItem("Veza međubankarskog naloga i stavki");
@@ -88,9 +84,7 @@ public class Menu extends JMenuBar {
 		mnuBanka.add(itemPoslovnoLice);
 		mnuBanka.add(itemRacunPoslovnihLica);
 		mnuBanka.add(itemUkidanje);
-		mnuBanka.add(itemPrenosIzvodaPresek);
 		mnuBanka.add(itemDnevnoStanjeRacuna);
-		mnuBanka.add(itemAnalitikaPreseka);
 		mnuBanka.add(itemAnalitikaIzvoda);
 		mnuBanka.add(itemMedjubankarskiNalog);
 		mnuBanka.add(itemVezaMedjubankarskogNalogaIStavke);
@@ -179,30 +173,11 @@ public class Menu extends JMenuBar {
 			}
 		});
 		
-		itemPrenosIzvodaPresek.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				PrenosIzvodaPresekDialog dialog = new PrenosIzvodaPresekDialog(MainFrame.getInstance());
-				dialog.setVisible(true);
-			}
-		});
-		
 		itemDnevnoStanjeRacuna.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				DnevnoStanjeRacunaDialog dialog = new DnevnoStanjeRacunaDialog(MainFrame.getInstance());
-				
-				dialog.setVisible(true);
-			}
-		});
-			
-		itemAnalitikaPreseka.addActionListener(new ActionListener() {
-				
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				AnalitikaPresekaDialog dialog = new AnalitikaPresekaDialog(MainFrame.getInstance());
 				
 				dialog.setVisible(true);
 			}

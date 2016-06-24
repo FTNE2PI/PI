@@ -1,9 +1,8 @@
+/app/
+/db/
+/exceptions/
 /gui/
 /table/
 /users/
 /utils/
 /xml/
-/exceptions/
-/zadaci/
-/tasks/
-/app/

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	elementFormDefault="qualified"
-	targetNamespace="http://informatika.ftn.uns.ac.rs/xws/tim1/clearingNalog"
-	xmlns="http://informatika.ftn.uns.ac.rs/xws/tim1/clearingNalog">
+	targetNamespace="http://banka.com/clearingNalog"
+	xmlns="http://banka.com/clearingNalog">
 
 	<xs:element name="Clearing_nalog" type="ClearingNalog" />
 	<xs:complexType name="ClearingNalog">

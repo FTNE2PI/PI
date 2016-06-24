@@ -1,12 +1,12 @@
 eclipse.preferences.version=1
 encoding//src/gui/Menu.java=UTF-8
+encoding//src/gui/actions/dialog/GeneratePresekAction.java=UTF-8
 encoding//src/gui/dialogs/generic/AnalitikaIzvodaDialog.java=UTF-8
-encoding//src/gui/dialogs/generic/AnalitikaPresekaDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/BankaDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/DnevnoStanjeRacunaDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/DrzavaDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/PoslovnoLiceDialog.java=UTF-8
-encoding//src/gui/dialogs/generic/PrenosIzvodaPresekDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/RacunPoslovnihLicaDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/UkidanjeDialog.java=UTF-8
 encoding//src/gui/dialogs/generic/VezaMedjubankarskogNalogaIStavkiDialog.java=UTF-8
+encoding//src/gui/tasks/ImportNalogZaPlacanje.java=UTF-8
