@@ -51,7 +51,7 @@ public class ImportNalogZaPlacanjeAction extends AbstractAction {
 					e1.printStackTrace();
 				} catch (SQLException e1) {
 					JOptionPane.showMessageDialog(MainFrame.getInstance(), 
-							"Desila se neo�?ekivana greška sa bazom podataka, molimo vas da kontaktirate administratora sistema: \n" +
+							"Desila se neočekivana greška sa bazom podataka, molimo vas da kontaktirate administratora sistema: \n" +
 								e1.getMessage(), 
 							"Greška sa bazom podataka", JOptionPane.ERROR_MESSAGE);
 				} catch (InvalidNalogZaPlacanjeException e1) {

@@ -61,16 +61,6 @@
     <zoom/>
     <next>
         <nextItem>
-            <table>KURSNA_LISTA</table>
-            <className>KursnaListaDialog</className>
-            <elements>
-                <nextElement>
-                    <from>BANK_SIFRA</from>
-                    <to>BANK_SIFRA</to>
-                </nextElement>
-            </elements>
-        </nextItem>
-        <nextItem>
             <table>RACUN_POSLOVNIH_LICA</table>
             <className>RacunPoslovnihLicaDialog</className>
             <elements>
@@ -91,6 +81,16 @@
                 <nextElement>
                     <from>BANK_SIFRA</from>
                     <to>BANK_SIFRA_DUZNIK</to>
+                </nextElement>
+            </elements>
+        </nextItem>
+        <nextItem>
+            <table>KURSNA_LISTA</table>
+            <className>KursnaListaDialog</className>
+            <elements>
+                <nextElement>
+                    <from>BANK_SIFRA</from>
+                    <to>BANK_SIFRA</to>
                 </nextElement>
             </elements>
         </nextItem>

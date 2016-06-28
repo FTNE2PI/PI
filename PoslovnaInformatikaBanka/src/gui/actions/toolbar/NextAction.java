@@ -214,7 +214,7 @@ public class NextAction extends AbstractAction {
 				.getNext().get(index);
 		try {
 			nextDialog = (GenericDialog) Class
-					.forName("dialogs." + np.getClassName())
+					.forName("gui.dialogs.generic." + np.getClassName())
 					.getConstructor(JFrame.class)
 					.newInstance(MainFrame.getInstance());
 		} catch (Exception e) {

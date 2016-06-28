@@ -2,14 +2,13 @@ package gui.actions.dialog;
 
 import exceptions.InvalidExportException;
 import gui.MainFrame;
-import gui.dialogs.generic.MedjubankarskiNalogDialog;
-import gui.tasks.ExportMedjubankarskiNalog;
+import gui.dialogs.generic.AnalitikaIzvodaDialog;
+import gui.tasks.ExportNalogZaPlacanje;
 
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import javax.swing.AbstractAction;
@@ -18,12 +17,16 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class ExportMedjubankarskiNalogAction extends AbstractAction {
+public class ExportNalogZaPlacanjeAction extends AbstractAction {
 
-	private MedjubankarskiNalogDialog dialog;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private AnalitikaIzvodaDialog dialog;
 	private JFileChooser fileChooser;
 
-	public ExportMedjubankarskiNalogAction(MedjubankarskiNalogDialog dialog) {
+	public ExportNalogZaPlacanjeAction(AnalitikaIzvodaDialog dialog) {
 		this.dialog = dialog;
 		putValue(NAME, "Export");
 		File defaultLocation = new File("./testExportResults");
@@ -46,23 +49,11 @@ public class ExportMedjubankarskiNalogAction extends AbstractAction {
 			}
 			JTable tableGrid = dialog.getTableGrid();
 			int selectedRow = tableGrid.getSelectedRow();
-			String tipNaloga = (String) tableGrid.getValueAt(
-					selectedRow, 3);
-			int mbnId = ((BigDecimal)tableGrid.getValueAt(selectedRow, 0)).intValue();
 			try {
-				System.out.println(mbnId);
 				String successMessage = null;
-				if(tipNaloga.equals("R")){
-					ExportMedjubankarskiNalog.exportRTGSNalog(mbnId, new FileOutputStream(selectedFile));
-					successMessage = "Uspešno eksportovanje RTGS naloga";
-				}
-				else if(tipNaloga.equals("C")){
-					ExportMedjubankarskiNalog.exportClearingNalog(mbnId, new FileOutputStream(selectedFile));
-					successMessage = "Uspešno eksportovanje Clearing naloga";
-				}
-				else
-					JOptionPane.showMessageDialog(dialog, "Greška u očitavanju tipa naloga sa tabele: " + tipNaloga, 
-							"Greška", JOptionPane.ERROR_MESSAGE);
+				ExportNalogZaPlacanje.exportNalog(new FileOutputStream(selectedFile));
+					successMessage = "Uspešno eksportovanje naloga";
+				
 				if(successMessage != null){
 					JOptionPane.showMessageDialog(dialog, successMessage, 
 							"Uspeh", JOptionPane.INFORMATION_MESSAGE);

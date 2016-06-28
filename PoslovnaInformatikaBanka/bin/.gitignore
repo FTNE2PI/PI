@@ -1,3 +1,4 @@
+/DBConnection.properties
 /app/
 /db/
 /exceptions/
@@ -6,3 +7,4 @@
 /users/
 /utils/
 /xml/
+/dialogs/

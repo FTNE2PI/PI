@@ -54,6 +54,9 @@ import org.eclipse.jdt.core.compiler.InvalidInputException;
 import table.property.ColumnProperties;
 import table.property.PropertiesContainer;
 import table.property.TableProperties;
+import table.property.LookUpElementProperties;
+import table.property.ZoomElementProperties;
+import table.property.ZoomProperties;
 
 public abstract class GenericDialog extends JDialog {
 	private static final long serialVersionUID = 9212332865510405498L;
@@ -664,12 +667,26 @@ public abstract class GenericDialog extends JDialog {
 
 	public Vector<String> getColumnsForZoom() {
 		Vector<String> retVal = new Vector<String>();
-		
+		for (ZoomProperties zp : ((GenericTableModel) tableGrid.getModel())
+				.getTableProperties().getZoom()) {
+			for (ZoomElementProperties zep : zp.getZoomElements()) {
+				retVal.add(zep.getFrom());
+			}
+			for (LookUpElementProperties lookUp : zp.getLookUpElements()) {
+				retVal.add(lookUp.getName());
+			}
+		}
 		return retVal;
 	}
 
+	/**
+	 * Metoda koja vraca vektor naziva labela primarnih kljuceva.
+	 * 
+	 * @return
+	 */
 	public Vector<String> getPrimaryKeysNames() {
-		return null;
+		GenericTableModel gtm = (GenericTableModel) tableGrid.getModel();
+		return gtm.getTableProperties().getPrimaryKeysLabelName();
 	}
 
 	public String getTableName() {

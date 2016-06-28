@@ -30,7 +30,7 @@ public class VezaMedjubankarskogNalogaIStavkiDialog extends GenericDialog {
 	private JTextField tfIDNaloga;
 
 	public VezaMedjubankarskogNalogaIStavkiDialog(JFrame parent) {
-		super(parent, "Veza meÄ‘ubankarskog naloga i stavki", "VEZA_MEDJUBANKARSKOG_NALOGA_I_STAVKI", true);
+		super(parent, "Veza medjubankarskog naloga i stavki", "VEZA_MEDJUBANKARSKOG_NALOGA_I_STAVKI", false);
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package gui.dialogs.generic;
 
 import gui.MainFrame;
+import gui.actions.dialog.ExportMedjubankarskiNalogAction;
+import gui.actions.dialog.ExportNalogZaPlacanjeAction;
 import gui.custom.JLimitTextField;
 
 import java.awt.FlowLayout;
@@ -51,11 +53,14 @@ public class AnalitikaIzvodaDialog extends GenericDialog {
 	
 	private DnevnoStanjeRacunaDialog dlgDnevnoStanjeRacuna;
 	private ValutaDialog dlgValuta;
+	private JButton btnExport;
 	
 	public AnalitikaIzvodaDialog(JFrame parent) {
 		
 		super(parent, "Analitika izvoda", "ANALITIKA_IZVODA", true);
 		tableGrid.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		//btnExport.setVisible(false);
+		formButtonsPanel.add(btnExport, 0);
 		
 	}
 	
@@ -67,6 +72,7 @@ public class AnalitikaIzvodaDialog extends GenericDialog {
 		tfBrojRacuna.setName("BAR_RACUN");
 		tfBrojIzvoda = new JDigitsTextField(3, 3, true, true);
 		tfBrojIzvoda.setName("DSR_IZVOD");
+		btnExport = new JButton(new ExportNalogZaPlacanjeAction(this));
 		JButton btnZoom1 = new JButton("...");
 		btnZoom1.addActionListener(new ActionListener() {
 			

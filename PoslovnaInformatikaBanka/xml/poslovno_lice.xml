@@ -79,16 +79,6 @@
     <zoom/>
     <next>
         <nextItem>
-            <table>PRENOS_IZVODA_PRESEK</table>
-            <className>PrenosIzvodaPresekDialog</className>
-            <elements>
-                <nextElement>
-                    <from>L_ID</from>
-                    <to>L_ID</to>
-                </nextElement>
-            </elements>
-        </nextItem>
-        <nextItem>
             <table>RACUN_POSLOVNIH_LICA</table>
             <className>RacunPoslovnihLicaDialog</className>
             <elements>

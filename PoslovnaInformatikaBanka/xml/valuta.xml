@@ -49,6 +49,16 @@
     </zoom>
     <next>
         <nextItem>
+            <table>RACUN_POSLOVNIH_LICA</table>
+            <className>RacunPoslovnihLicaDialog</className>
+            <elements>
+                <nextElement>
+                    <from>VA_SIFRA</from>
+                    <to>VA_SIFRA</to>
+                </nextElement>
+            </elements>
+        </nextItem>
+        <nextItem>
             <table>KURS_U_VALUTI</table>
             <className>KursUValutiDialog</className>
             <elements>
@@ -59,16 +69,6 @@
                 <nextElement>
                     <from>VA_SIFRA</from>
                     <to>VA_SIFRA_OSNOVNA</to>
-                </nextElement>
-            </elements>
-        </nextItem>
-        <nextItem>
-            <table>RACUN_POSLOVNIH_LICA</table>
-            <className>RacunPoslovnihLicaDialog</className>
-            <elements>
-                <nextElement>
-                    <from>VA_SIFRA</from>
-                    <to>VA_SIFRA</to>
                 </nextElement>
             </elements>
         </nextItem>

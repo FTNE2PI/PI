@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 import components.JDigitsTextField;
 
 @SuppressWarnings("serial")
@@ -30,7 +31,6 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	private JTextField tfIDNaloga;
 	private JDigitsTextField tfSifraBankePoverioca;
 	private JDigitsTextField tfSifraBankeDuznika;
-	@SuppressWarnings("rawtypes")
 	private JComboBox cbTipNaloga;
 	private JDatePickerImpl dpDatumNaloga;
 	private JButton btnExport;
@@ -39,7 +39,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	
 	public MedjubankarskiNalogDialog(JFrame parent) {
 		
-		super(parent, "Medjubankarski nalog", "MEDJUBANKARSKI_NALOG", true);
+		super(parent, "MeÄ‘ubankarski nalog", "MEDJUBANKARSKI_NALOG", false);
 		btnExport.setVisible(false);
 		formButtonsPanel.add(btnExport, 0);
 		
@@ -49,8 +49,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	@Override
 	protected void initializeFormInputPanel() {
 		
-		//Stavljam ovde inicijalizaciju dugmeta da ne bi pravili novu metodu initializeFormButtonsPanel
-		//Ako bude potrebno, napravicemo tu metodu
+		
 		btnExport = new JButton(new ExportMedjubankarskiNalogAction(this));
 
 		
@@ -75,7 +74,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 		});
 		panSifraBankePoverioca.add(tfSifraBankePoverioca);
 		panSifraBankePoverioca.add(btnZoom1);
-		addComponentToFormInputPanel(panSifraBankePoverioca, "Šifra banke poverioca", true);
+		addComponentToFormInputPanel(panSifraBankePoverioca, "Å ifra banke poverioca", true);
 		
 		JPanel panSifraBankeDuznika = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tfSifraBankeDuznika = new JDigitsTextField(3, 3, true, true);
@@ -94,7 +93,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 		});
 		panSifraBankeDuznika.add(tfSifraBankeDuznika);
 		panSifraBankeDuznika.add(btnZoom2);
-		addComponentToFormInputPanel(panSifraBankeDuznika, "Šifra banke dužnika", true);
+		addComponentToFormInputPanel(panSifraBankeDuznika, "Å ifra banke duÅ¾nika", true);
 		
 		String[] items = new String[] {"R", "C"};
 		cbTipNaloga = new JComboBox(items);
@@ -143,6 +142,7 @@ public class MedjubankarskiNalogDialog extends GenericDialog {
 	@Override
 	public void sync() {
 		super.sync();
+		btnExport.setVisible(true);
 		if (tableGrid.getSelectedRow() != -1 && (boolean)tableGrid.getValueAt(tableGrid.getSelectedRow(), 5)==false)
 			btnExport.setVisible(true);
 		else

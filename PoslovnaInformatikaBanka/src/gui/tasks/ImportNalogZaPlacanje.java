@@ -146,11 +146,11 @@ public class ImportNalogZaPlacanje {
 					postojiRacunDuznika = true;
 				}
 				else if(odgovor == RacunPostojiOdgovor.NE_POSTOJI && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAÅ½NJA: Račun dužnika bi trebao da se nalazi u banci, ali nije naÄ‘en.\n");
+					response.append("PAŽNJA: Račun dužnika bi trebao da se nalazi u banci, ali nije nadjen.\n");
 					tipGreske = ErrorType.POGRESAN_NALOG;
 				}
 				else if(odgovor == RacunPostojiOdgovor.UKINUT_JE && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAÅ½NJA: Račun dužnika je ukinut.\n");
+					response.append("PAŽNJA: Račun dužnika je ukinut.\n");
 					tipGreske = ErrorType.RACUN_UKINUT;
 				}
 			}
@@ -159,7 +159,7 @@ public class ImportNalogZaPlacanje {
 			}
 		}
 		else{
-			response.append("PAÅ½NJA: Banka duznika nije nadjena u nasoj bazi podataka!\n");
+			response.append("PAŽNJA: Banka duznika nije nadjena u nasoj bazi podataka!\n");
 			if(tipGreske == ErrorType.ISPRAVAN)
 				tipGreske = ErrorType.NEPOSTOJECA_BANKA_RACUNA;
 		}
@@ -173,11 +173,11 @@ public class ImportNalogZaPlacanje {
 					postojiRacunPoverioca = true;
 				}
 				else if(odgovor == RacunPostojiOdgovor.NE_POSTOJI && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAÅ½NJA: Račun poverioca bi trebao da se nalazi u banci, ali nije naÄ‘en.\n");
+					response.append("PAŽNJA: Račun poverioca bi trebao da se nalazi u banci, ali nije nadjen.\n");
 					tipGreske = ErrorType.POGRESAN_NALOG;
 				}
 				else if(odgovor == RacunPostojiOdgovor.UKINUT_JE && tipGreske == ErrorType.ISPRAVAN){
-					response.append("PAÅ½NJA: Račun poverioca je ukinut!\n");
+					response.append("PAŽNJA: Račun poverioca je ukinut!\n");
 					tipGreske = ErrorType.RACUN_UKINUT;
 				}
 				
@@ -187,7 +187,7 @@ public class ImportNalogZaPlacanje {
 			}
 		}
 		else{
-			response.append("PAÅ½NJA: Banka poverioca nije nadjena u nasoj bazi podataka!\n");
+			response.append("PAŽNJA: Banka poverioca nije nadjena u nasoj bazi podataka!\n");
 			if(tipGreske == ErrorType.ISPRAVAN)
 				tipGreske = ErrorType.NEPOSTOJECA_BANKA_RACUNA;
 		}

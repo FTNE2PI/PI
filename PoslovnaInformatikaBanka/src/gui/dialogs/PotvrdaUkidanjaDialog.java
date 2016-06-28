@@ -60,7 +60,7 @@ public class PotvrdaUkidanjaDialog extends JDialog {
 		super(parent);
 
 		brojRacunaKojiSeUkida = brojRacuna;
-		setTitle("Ukidanje raƒ?una");
+		setTitle("Ukidanje raƒçuna");
 		//setPreferredSize(new Dimension(400, 300));
 		setLocationRelativeTo(parent);
 		setModal(true);
@@ -69,7 +69,7 @@ public class PotvrdaUkidanjaDialog extends JDialog {
 		panInput.setLayout(new BoxLayout(panInput, BoxLayout.Y_AXIS));
 
 		JPanel panRacunKojiSeUkida = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblRacunKojiSeUkida = new JLabel("Broj raƒ?una :");
+		JLabel lblRacunKojiSeUkida = new JLabel("Broj raƒçuna :");
 		lblRacunKojiSeUkida.setPreferredSize(new Dimension(150, 20));
 		txtBrojRacunaKojiSeUkida = new JTextField(brojRacunaKojiSeUkida);
 		txtBrojRacunaKojiSeUkida.setEditable(false);
@@ -247,11 +247,11 @@ public class PotvrdaUkidanjaDialog extends JDialog {
 			throw new InvalidInputException("Obavezna polja nisu popunjena");
 		
 		if (racunPrenosa.length()!=18)
-			throw new InvalidInputException("Raƒ?un na koji se sredstva prenose mora imati 18 cifara");
+			throw new InvalidInputException("Raƒçun na koji se sredstva prenose mora imati 18 cifara");
 		
 		if (!kontrolniBrojGenerisan)
 			throw new InvalidInputException(
-					"Kontrolni broj raƒ?una na koji se sredstva prenose nije generisan");
+					"Kontrolni broj raƒçuna na koji se sredstva prenose nije generisan");
 	}
 	
 	public boolean isKontrolniBrojGenerisan() {

@@ -1,7 +1,6 @@
 package gui.dialogs.generic;
 
 import gui.MainFrame;
-import gui.actions.dialog.GeneratePresekAction;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -35,14 +34,12 @@ public class DnevnoStanjeRacunaDialog extends GenericDialog {
 	
 	public DnevnoStanjeRacunaDialog(JFrame parent) {
 		super(parent, "Dnevno stanje računa", "DNEVNO_STANJE_RACUNA", true);
-		formButtonsPanel.add(btnGeneratePresek, 0);
 	}
 
 	@Override
 	protected void initializeFormInputPanel() {
 		
-		btnGeneratePresek = new JButton(new GeneratePresekAction(this));
-		
+	
 		JPanel panBrojRacuna=new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tfBrojRacuna = new JDigitsTextField(14, 18, false, true);
 		tfBrojRacuna.setName("BAR_RACUN");
@@ -121,10 +118,6 @@ public class DnevnoStanjeRacunaDialog extends GenericDialog {
 
 	public void sync() {
 		super.sync();
-		if (tableGrid.getSelectedRow() != -1)
-			btnGeneratePresek.setVisible(true);
-		else
-			btnGeneratePresek.setVisible(false);
 		
 	}
 	
